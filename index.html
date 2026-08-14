@@ -286,28 +286,34 @@ function speak(text){
 
   speechSynthesis.cancel();
 
-  const message=new SpeechSynthesisUtterance(text);
+  const message = new SpeechSynthesisUtterance(text);
 
-  message.rate=.95;
-  message.pitch=.82;
-  message.volume=1;
+  const voices = speechSynthesis.getVoices();
 
-  const voices=speechSynthesis.getVoices();
+  const britishVoice =
+    voices.find(v => /Daniel/i.test(v.name)) ||
+    voices.find(v => /en-GB/i.test(v.lang)) ||
+    voices.find(v => /British/i.test(v.name)) ||
+    voices.find(v => /en-US/i.test(v.lang));
 
-  const maleVoice=
-    voices.find(v=>v.lang==="en-GB") ||
-    voices.find(v=>v.lang==="en-US");
-
-  if(maleVoice){
-    message.voice=maleVoice;
+  if(britishVoice){
+    message.voice = britishVoice;
   }
 
-  speechSynthesis.speak(message);
-}
+  message.rate = 0.88;
+  message.pitch = 0.72;
+  message.volume = 1;
 
+  speechSynthesis.speak(message);
 function jarvis(text){
 
-  addMessage("JARVIS",text);
+  if(!text.toLowerCase().endsWith("sir.") &&
+     !text.toLowerCase().endsWith("sir")){
+
+    text = text.replace(/[.!?]+$/, "") + ", sir.";
+  }
+
+  addMessage("JARVIS", text);
 
   speak(text);
 }
