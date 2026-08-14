@@ -50,8 +50,6 @@ body:before{
   place-items:center;
 }
 
-/* HUD */
-
 .hud{
   position:relative;
   width:min(94vw,620px);
@@ -115,8 +113,7 @@ body:before{
   inset:15%;
   border-radius:50%;
 
-  border:
-    10px solid rgba(167,255,255,.77);
+  border:10px solid rgba(167,255,255,.77);
 
   border-left-color:
     rgba(235,185,65,.88);
@@ -131,9 +128,7 @@ body:before{
   position:absolute;
   inset:22%;
   border-radius:50%;
-
-  border:
-    3px dashed rgba(115,245,255,.48);
+  border:3px dashed rgba(115,245,255,.48);
 
   animation:reverseSpin 8s linear infinite;
 }
@@ -143,8 +138,7 @@ body:before{
   inset:28%;
   border-radius:50%;
 
-  border:
-    7px double rgba(141,248,255,.60);
+  border:7px double rgba(141,248,255,.60);
 
   border-top-color:transparent;
   border-bottom-color:transparent;
@@ -209,8 +203,7 @@ body:before{
 
   color:#ecffff;
 
-  font-size:
-    clamp(31px,8vw,68px);
+  font-size:clamp(31px,8vw,68px);
 
   font-weight:700;
 
@@ -263,8 +256,6 @@ body:before{
   color:#4e9ca7;
 }
 
-/* STATES */
-
 .listening .ring2{
   animation-duration:2s;
 }
@@ -277,6 +268,18 @@ body:before{
   box-shadow:
     inset 0 0 40px rgba(120,255,255,.25),
     0 0 60px rgba(60,235,255,.35);
+}
+
+.thinking .ring2{
+  animation-duration:.9s;
+}
+
+.thinking .ring3{
+  animation-duration:1.2s;
+}
+
+.thinking .ring4{
+  animation-duration:1.5s;
 }
 
 .speaking .ring1{
@@ -315,7 +318,6 @@ body:before{
 .ready{
   animation:pulse 2.5s ease-in-out infinite;
 }
-
 </style>
 </head>
 
@@ -357,6 +359,7 @@ body:before{
 
 </div>
 
+
 <script>
 
 const app =
@@ -381,9 +384,9 @@ let selectedVoice =
 null;
 
 
-/* -----------------------------
-   FIND BEST AVAILABLE VOICE
------------------------------ */
+/* --------------------------------
+   VOICE
+-------------------------------- */
 
 function findVoice(){
 
@@ -395,7 +398,6 @@ function findVoice(){
 
   const voices =
   speechSynthesis.getVoices();
-
 
   selectedVoice =
 
@@ -413,15 +415,6 @@ function findVoice(){
 
     voices.find(
       v => /Oliver/i.test(v.name)
-    )
-
-    ||
-
-    voices.find(
-      v =>
-      v.lang === "en-GB"
-      &&
-      /male/i.test(v.name)
     )
 
     ||
@@ -449,16 +442,15 @@ if(
 
   findVoice();
 
-  speechSynthesis
-  .onvoiceschanged =
+  speechSynthesis.onvoiceschanged =
   findVoice;
 
 }
 
 
-/* -----------------------------
-   AUTOMATIC SIR
------------------------------ */
+/* --------------------------------
+   ADD "SIR"
+-------------------------------- */
 
 function addSir(text){
 
@@ -467,24 +459,20 @@ function addSir(text){
   .trim()
   .replace(/[.!?]+$/,"");
 
-
   if(
     /\bsir$/i.test(clean)
   ){
-
     return clean + ".";
-
   }
-
 
   return clean + ", sir.";
 
 }
 
 
-/* -----------------------------
-   SPEECH
------------------------------ */
+/* --------------------------------
+   SPEAK RESPONSE
+-------------------------------- */
 
 function speak(text){
 
@@ -499,67 +487,51 @@ function speak(text){
 
   }
 
-
   const finalText =
   addSir(text);
 
-
   speechSynthesis.cancel();
-
 
   const voice =
   new SpeechSynthesisUtterance(
     finalText
   );
 
-
   findVoice();
-
 
   if(
     selectedVoice
   ){
-
     voice.voice =
     selectedVoice;
-
   }
-
-
-  /*
-  Tuned for calm,
-  deliberate British AI style.
-  */
 
   voice.rate =
   0.84;
 
-
   voice.pitch =
   0.82;
-
 
   voice.volume =
   1;
 
-
   speaking =
   true;
-
 
   app.classList.remove(
     "listening"
   );
 
+  app.classList.remove(
+    "thinking"
+  );
 
   app.classList.add(
     "speaking"
   );
 
-
   statusText.textContent =
   "RESPONDING";
-
 
   voice.onend =
   function(){
@@ -567,17 +539,14 @@ function speak(text){
     speaking =
     false;
 
-
     app.classList.remove(
       "speaking"
     );
-
 
     statusText.textContent =
     "TAP TO SPEAK";
 
   };
-
 
   voice.onerror =
   function(){
@@ -585,17 +554,14 @@ function speak(text){
     speaking =
     false;
 
-
     app.classList.remove(
       "speaking"
     );
-
 
     statusText.textContent =
     "VOICE OUTPUT ERROR";
 
   };
-
 
   speechSynthesis.speak(
     voice
@@ -604,9 +570,106 @@ function speak(text){
 }
 
 
-/* -----------------------------
+/* --------------------------------
+   OPENAI
+-------------------------------- */
+
+async function askAI(message){
+
+  statusText.textContent =
+  "THINKING";
+
+  app.classList.remove(
+    "listening"
+  );
+
+  app.classList.add(
+    "thinking"
+  );
+
+  try{
+
+    const response =
+    await fetch(
+      "/api/chat",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+          "application/json"
+        },
+
+        body:
+        JSON.stringify({
+          message:message
+        })
+      }
+    );
+
+    const data =
+    await response.json();
+
+    app.classList.remove(
+      "thinking"
+    );
+
+    if(
+      !response.ok
+    ){
+
+      console.log(
+        data
+      );
+
+      speak(
+        "I encountered a problem connecting to my intelligence system"
+      );
+
+      return;
+
+    }
+
+    if(
+      data.reply
+    ){
+
+      speak(
+        data.reply
+      );
+
+      return;
+
+    }
+
+    speak(
+      "I was unable to formulate a response"
+    );
+
+  }
+
+  catch(error){
+
+    console.log(
+      error
+    );
+
+    app.classList.remove(
+      "thinking"
+    );
+
+    speak(
+      "I am unable to reach my intelligence system at the moment"
+    );
+
+  }
+
+}
+
+
+/* --------------------------------
    RANDOM RESPONSE
------------------------------ */
+-------------------------------- */
 
 function random(list){
 
@@ -621,9 +684,9 @@ function random(list){
 }
 
 
-/* -----------------------------
+/* --------------------------------
    WEATHER
------------------------------ */
+-------------------------------- */
 
 function localWeather(){
 
@@ -639,10 +702,8 @@ function localWeather(){
 
   }
 
-
   statusText.textContent =
   "ACQUIRING LOCATION";
-
 
   navigator
   .geolocation
@@ -686,12 +747,11 @@ function localWeather(){
 
 
 async function cityWeather(
-  city
+city
 ){
 
   statusText.textContent =
   "ACCESSING WEATHER DATA";
-
 
   try{
 
@@ -713,10 +773,8 @@ async function cityWeather(
 
     );
 
-
     const data =
     await request.json();
-
 
     if(
       !data.results
@@ -733,10 +791,8 @@ async function cityWeather(
 
     }
 
-
     const place =
     data.results[0];
-
 
     getWeather(
 
@@ -803,14 +859,11 @@ name
 
     );
 
-
     const data =
     await request.json();
 
-
     const weather =
     data.current;
-
 
     speak(
 
@@ -869,9 +922,9 @@ name
 }
 
 
-/* -----------------------------
-   COMMAND PROCESSING
------------------------------ */
+/* --------------------------------
+   COMMANDS
+-------------------------------- */
 
 function processCommand(
 text
@@ -924,27 +977,16 @@ text
   }
 
 
-  /* HELLO */
-
-  if(
-    command === "hello"
-  ){
-
-    speak(
-      "Good evening"
-    );
-
-    return;
-
-  }
-
-
   /* TIME */
 
   if(
     command.includes(
-      "time"
+      "what time"
     )
+
+    ||
+
+    command === "time"
   ){
 
     const time =
@@ -961,7 +1003,6 @@ text
 
     );
 
-
     speak(
       "The time is " +
       time
@@ -977,13 +1018,25 @@ text
   if(
 
     command.includes(
-      "date"
+      "what date"
     )
 
     ||
 
     command.includes(
       "what day"
+    )
+
+    ||
+
+    command.includes(
+      "today's date"
+    )
+
+    ||
+
+    command.includes(
+      "todays date"
     )
 
   ){
@@ -1003,7 +1056,6 @@ text
       }
 
     );
-
 
     speak(
       "Today is " +
@@ -1039,7 +1091,6 @@ text
 
     );
 
-
     if(
       match
     ){
@@ -1056,15 +1107,15 @@ text
 
     }
 
-
     return;
 
   }
 
 
-  /* SYSTEM */
+  /* STATUS */
 
   if(
+
     command.includes(
       "system status"
     )
@@ -1078,6 +1129,7 @@ text
     ||
 
     command === "status"
+
   ){
 
     speak(
@@ -1099,34 +1151,7 @@ text
   }
 
 
-  /* HOW ARE YOU */
-
-  if(
-    command.includes(
-      "how are you"
-    )
-  ){
-
-    speak(
-
-      random([
-
-        "Operating within normal parameters",
-
-        "All systems are nominal. Thank you for asking",
-
-        "Quite well"
-
-      ])
-
-    );
-
-    return;
-
-  }
-
-
-  /* THANKS */
+  /* THANK YOU */
 
   if(
 
@@ -1161,104 +1186,18 @@ text
   }
 
 
-  /* ARE YOU THERE */
+  /* EVERYTHING ELSE GOES TO AI */
 
-  if(
-    command.includes(
-      "are you there"
-    )
-  ){
-
-    speak(
-      "Always"
-    );
-
-    return;
-
-  }
-
-
-  /* GOOD MORNING */
-
-  if(
-    command.includes(
-      "good morning"
-    )
-  ){
-
-    speak(
-      "Good morning. Systems are standing by"
-    );
-
-    return;
-
-  }
-
-
-  /* GOOD NIGHT */
-
-  if(
-    command.includes(
-      "good night"
-    )
-  ){
-
-    speak(
-      "Good night. I will remain on standby"
-    );
-
-    return;
-
-  }
-
-
-  /* SHUT DOWN */
-
-  if(
-
-    command.includes(
-      "shut down"
-    )
-
-    ||
-
-    command.includes(
-      "goodbye"
-    )
-
-  ){
-
-    speak(
-      "Very good. I will remain on standby"
-    );
-
-    return;
-
-  }
-
-
-  /* UNKNOWN */
-
-  speak(
-
-    random([
-
-      "That intelligence module is not installed yet",
-
-      "I do not have access to that information yet",
-
-      "That function is not available yet"
-
-    ])
-
+  askAI(
+    text
   );
 
 }
 
 
-/* -----------------------------
+/* --------------------------------
    MICROPHONE
------------------------------ */
+-------------------------------- */
 
 function setupRecognition(){
 
@@ -1395,9 +1334,9 @@ function setupRecognition(){
 }
 
 
-/* -----------------------------
-   START LISTENING
------------------------------ */
+/* --------------------------------
+   LISTEN
+-------------------------------- */
 
 function listen(){
 
@@ -1440,9 +1379,9 @@ function listen(){
 }
 
 
-/* -----------------------------
+/* --------------------------------
    TAP SCREEN
------------------------------ */
+-------------------------------- */
 
 app.addEventListener(
 "click",
