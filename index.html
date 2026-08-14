@@ -1,662 +1,1410 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>JARVIS</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-  user-select:none;
-}
-
-html,body{
-  margin:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#010607;
-  color:#dfffff;
-  font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-  background:
-    radial-gradient(circle at 50% 48%,rgba(30,220,240,.17),transparent 25%),
-    radial-gradient(circle at center,#08282d 0%,#031417 40%,#000 80%);
-}
-
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.18;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0 3px,
-      rgba(100,240,255,.035) 4px
-    );
-}
-
-.app{
-  height:100%;
-  width:100%;
-  position:relative;
-  display:grid;
-  place-items:center;
-}
-
-.hud{
-  position:relative;
-  width:min(94vw,620px);
-  height:min(94vw,620px);
-  border-radius:50%;
-}
-
-.outer{
-  position:absolute;
-  inset:1%;
-  border-radius:50%;
-  border:2px solid rgba(95,240,250,.22);
-  box-shadow:
-    0 0 40px rgba(50,220,245,.15),
-    inset 0 0 35px rgba(50,220,245,.08);
-}
-
-.ticks{
-  position:absolute;
-  inset:0;
-  border-radius:50%;
-
-  background:
-    repeating-conic-gradient(
-      rgba(170,255,255,.76) 0deg .8deg,
-      transparent 1deg 4.5deg
-    );
-
-  -webkit-mask:
-    radial-gradient(
-      circle,
-      transparent 0 46%,
-      black 46.5% 48%,
-      transparent 48.5%
-    );
-
-  mask:
-    radial-gradient(
-      circle,
-      transparent 0 46%,
-      black 46.5% 48%,
-      transparent 48.5%
-    );
-
-  animation:spin 45s linear infinite;
-}
-
-.ring1{
-  position:absolute;
-  inset:7%;
-  border-radius:50%;
-  border:28px solid rgba(74,190,205,.30);
-
-  box-shadow:
-    inset 0 0 25px rgba(120,255,255,.16),
-    0 0 28px rgba(60,230,255,.12);
-}
-
-.ring2{
-  position:absolute;
-  inset:15%;
-  border-radius:50%;
-
-  border:10px solid rgba(167,255,255,.77);
-
-  border-left-color:
-    rgba(235,185,65,.88);
 
-  border-right-color:
-    rgba(83,218,230,.47);
+  <meta charset="UTF-8">
 
-  animation:spin 15s linear infinite;
-}
+  <meta
+    name="viewport"
+    content="width=device-width,
+    initial-scale=1.0,
+    maximum-scale=1.0,
+    user-scalable=no,
+    viewport-fit=cover"
+  >
 
-.ring3{
-  position:absolute;
-  inset:22%;
-  border-radius:50%;
-  border:3px dashed rgba(115,245,255,.48);
+  <title>JARVIS</title>
 
-  animation:reverseSpin 8s linear infinite;
-}
 
-.ring4{
-  position:absolute;
-  inset:28%;
-  border-radius:50%;
+  <!-- ========================= -->
+  <!-- IPHONE APP ICON -->
+  <!-- ========================= -->
 
-  border:7px double rgba(141,248,255,.60);
+  <link
+    rel="apple-touch-icon"
+    href="/apple-touch-icon.png"
+  >
 
-  border-top-color:transparent;
-  border-bottom-color:transparent;
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
 
-  animation:spin 6s linear infinite;
-}
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
 
-.innerTicks{
-  position:absolute;
-  inset:31%;
-  border-radius:50%;
+  <meta
+    name="apple-mobile-web-app-title"
+    content="JARVIS"
+  >
 
-  background:
-    repeating-conic-gradient(
-      rgba(140,245,255,.55) 0deg 1deg,
-      transparent 1.5deg 8deg
-    );
+  <meta
+    name="theme-color"
+    content="#02090e"
+  >
 
-  -webkit-mask:
-    radial-gradient(
-      circle,
-      transparent 0 44%,
-      black 45% 48%,
-      transparent 49%
-    );
 
-  mask:
-    radial-gradient(
-      circle,
-      transparent 0 44%,
-      black 45% 48%,
-      transparent 49%
-    );
+  <style>
 
-  animation:reverseSpin 19s linear infinite;
-}
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-.core{
-  position:absolute;
-  inset:34%;
-  border-radius:50%;
 
-  background:
-    radial-gradient(
-      circle,
-      #041011 0%,
-      #010506 65%,
-      #000 100%
-    );
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
 
-  box-shadow:
-    inset 0 0 40px rgba(80,240,255,.14),
-    0 0 35px rgba(80,235,255,.11);
-}
+      background:
+        radial-gradient(
+          circle at center,
+          #082735 0%,
+          #031219 33%,
+          #01070b 70%,
+          #000 100%
+        );
 
-.name{
-  position:absolute;
-  inset:0;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-  display:grid;
-  place-items:center;
+      color: #aef7ff;
+    }
 
-  color:#ecffff;
 
-  font-size:clamp(31px,8vw,68px);
+    body {
+      min-height: 100dvh;
+    }
 
-  font-weight:700;
 
-  letter-spacing:.12em;
+    .app {
 
-  text-shadow:
-    0 0 8px #cfffff,
-    0 0 19px #4beaff,
-    0 0 38px rgba(30,210,255,.48);
+      width: 100%;
+      height: 100dvh;
 
-  z-index:20;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-.status{
-  position:fixed;
+      position: relative;
 
-  bottom:
-    calc(28px + env(safe-area-inset-bottom));
+      overflow: hidden;
 
-  left:0;
-  right:0;
+      touch-action: manipulation;
+    }
 
-  text-align:center;
 
-  font-size:12px;
 
-  letter-spacing:.22em;
+    /* ========================= */
+    /* BACKGROUND GLOW */
+    /* ========================= */
 
-  color:#79e9ef;
+    .background-glow {
 
-  text-shadow:
-    0 0 8px rgba(90,230,255,.5);
-}
+      position: absolute;
 
-.substatus{
-  position:fixed;
+      width: 700px;
+      height: 700px;
 
-  top:
-    calc(18px + env(safe-area-inset-top));
+      border-radius: 50%;
 
-  left:0;
-  right:0;
+      background:
+        radial-gradient(
+          circle,
+          rgba(0, 210, 255, .14),
+          rgba(0, 155, 210, .05) 40%,
+          transparent 70%
+        );
 
-  text-align:center;
+      filter: blur(15px);
 
-  font-size:9px;
+      animation:
+        backgroundPulse 4s ease-in-out infinite;
+    }
 
-  letter-spacing:.18em;
 
-  color:#4e9ca7;
-}
+    @keyframes backgroundPulse {
 
-.listening .ring2{
-  animation-duration:2s;
-}
+      0%,
+      100% {
+        transform: scale(.95);
+        opacity: .55;
+      }
 
-.listening .ring3{
-  animation-duration:1.4s;
-}
+      50% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+    }
 
-.listening .core{
-  box-shadow:
-    inset 0 0 40px rgba(120,255,255,.25),
-    0 0 60px rgba(60,235,255,.35);
-}
 
-.thinking .ring2{
-  animation-duration:.9s;
-}
 
-.thinking .ring3{
-  animation-duration:1.2s;
-}
+    /* ========================= */
+    /* MAIN HUD */
+    /* ========================= */
 
-.thinking .ring4{
-  animation-duration:1.5s;
-}
+    .hud {
 
-.speaking .ring1{
-  filter:brightness(1.55);
-}
+      position: relative;
 
-.speaking .ring4{
-  animation-duration:1.5s;
-}
+      width: min(88vw, 520px);
+      aspect-ratio: 1 / 1;
 
-.speaking .name{
-  text-shadow:
-    0 0 10px #fff,
-    0 0 25px #5ff4ff,
-    0 0 60px #00bfff;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
-}
+      filter:
+        drop-shadow(
+          0 0 20px
+          rgba(0, 220, 255, .25)
+        );
+    }
 
-@keyframes reverseSpin{
-  to{
-    transform:rotate(-360deg);
-  }
-}
 
-@keyframes pulse{
-  50%{
-    transform:scale(1.025);
-  }
-}
 
-.ready{
-  animation:pulse 2.5s ease-in-out infinite;
-}
-</style>
+    /* ========================= */
+    /* OUTER TICK RING */
+    /* ========================= */
+
+    .ticks {
+
+      position: absolute;
+      inset: 0;
+
+      border-radius: 50%;
+
+      background:
+
+        repeating-conic-gradient(
+
+          from 0deg,
+
+          rgba(88, 235, 255, .8)
+          0deg 1deg,
+
+          transparent
+          1deg 4deg
+        );
+
+      mask:
+        radial-gradient(
+          circle,
+          transparent 0%,
+          transparent 88%,
+          black 89%,
+          black 95%,
+          transparent 96%
+        );
+
+      -webkit-mask:
+        radial-gradient(
+          circle,
+          transparent 0%,
+          transparent 88%,
+          black 89%,
+          black 95%,
+          transparent 96%
+        );
+
+      opacity: .65;
+
+      animation:
+        spin 38s linear infinite;
+    }
+
+
+
+    /* ========================= */
+    /* HUD RINGS */
+    /* ========================= */
+
+    .ring {
+
+      position: absolute;
+
+      border-radius: 50%;
+
+      border-style: solid;
+
+      box-shadow:
+        inset 0 0 18px rgba(0, 217, 255, .08),
+        0 0 18px rgba(0, 217, 255, .08);
+    }
+
+
+    .ring1 {
+
+      width: 92%;
+      height: 92%;
+
+      border-width: 2px;
+
+      border-color:
+        rgba(55, 222, 255, .7)
+        rgba(55, 222, 255, .18)
+        rgba(55, 222, 255, .7)
+        rgba(55, 222, 255, .18);
+
+      animation:
+        spin 18s linear infinite;
+    }
+
+
+    .ring2 {
+
+      width: 77%;
+      height: 77%;
+
+      border-width: 4px;
+
+      border-color:
+        rgba(0, 205, 245, .85)
+        transparent
+        rgba(0, 205, 245, .3)
+        transparent;
+
+      animation:
+        reverseSpin 14s linear infinite;
+    }
+
+
+    .ring3 {
+
+      width: 63%;
+      height: 63%;
+
+      border-width: 2px;
+
+      border-color:
+        rgba(119, 244, 255, .32)
+        rgba(119, 244, 255, .8)
+        rgba(119, 244, 255, .32)
+        rgba(119, 244, 255, .8);
+
+      animation:
+        spin 9s linear infinite;
+    }
+
+
+    .ring4 {
+
+      width: 48%;
+      height: 48%;
+
+      border-width: 5px;
+
+      border-color:
+        rgba(97, 242, 255, .85)
+        rgba(97, 242, 255, .15)
+        rgba(97, 242, 255, .85)
+        rgba(97, 242, 255, .15);
+
+      animation:
+        reverseSpin 7s linear infinite;
+    }
+
+
+
+    /* ========================= */
+    /* INNER TICKS */
+    /* ========================= */
+
+    .innerTicks {
+
+      position: absolute;
+
+      width: 70%;
+      height: 70%;
+
+      border-radius: 50%;
+
+      background:
+
+        repeating-conic-gradient(
+
+          rgba(78, 232, 255, .75)
+          0deg .7deg,
+
+          transparent
+          .7deg 5deg
+        );
+
+      mask:
+        radial-gradient(
+          circle,
+          transparent 0%,
+          transparent 86%,
+          black 87%,
+          black 92%,
+          transparent 93%
+        );
+
+      -webkit-mask:
+        radial-gradient(
+          circle,
+          transparent 0%,
+          transparent 86%,
+          black 87%,
+          black 92%,
+          transparent 93%
+        );
+
+      opacity: .7;
+
+      animation:
+        reverseSpin 24s linear infinite;
+    }
+
+
+
+    /* ========================= */
+    /* AMBER ACCENT */
+    /* ========================= */
+
+    .amber {
+
+      position: absolute;
+
+      width: 88%;
+      height: 88%;
+
+      border-radius: 50%;
+
+      border:
+        4px solid transparent;
+
+      border-left-color:
+        rgba(255, 172, 43, .9);
+
+      transform:
+        rotate(25deg);
+
+      opacity: .65;
+
+      filter:
+        drop-shadow(
+          0 0 6px
+          rgba(255, 170, 40, .5)
+        );
+
+      animation:
+        amberMove 7s ease-in-out infinite;
+    }
+
+
+    @keyframes amberMove {
+
+      0%,
+      100% {
+        transform:
+          rotate(15deg);
+      }
+
+      50% {
+        transform:
+          rotate(48deg);
+      }
+    }
+
+
+
+    /* ========================= */
+    /* CENTER CORE */
+    /* ========================= */
+
+    .core {
+
+      position: absolute;
+
+      width: 37%;
+      height: 37%;
+
+      border-radius: 50%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+
+      background:
+
+        radial-gradient(
+          circle,
+          rgba(0, 191, 230, .25),
+          rgba(0, 74, 99, .18) 45%,
+          rgba(0, 10, 15, .8) 72%
+        );
+
+      border:
+        1px solid
+        rgba(123, 244, 255, .55);
+
+      box-shadow:
+
+        inset 0 0 32px
+        rgba(0, 220, 255, .17),
+
+        0 0 30px
+        rgba(0, 220, 255, .2);
+
+      z-index: 10;
+
+      transition:
+        .3s ease;
+    }
+
+
+
+    /* ========================= */
+    /* TEXT */
+    /* ========================= */
+
+    .name {
+
+      font-size:
+        clamp(18px, 5vw, 34px);
+
+      font-weight: 300;
+
+      letter-spacing:
+        clamp(2px, 1vw, 7px);
+
+      color: #b9faff;
+
+      text-shadow:
+        0 0 12px
+        rgba(80, 235, 255, .7);
+
+      margin-left: 5px;
+    }
+
+
+    .status {
+
+      position: absolute;
+
+      top: calc(50% + min(27vw, 155px));
+
+      width: 100%;
+
+      text-align: center;
+
+      font-size: 13px;
+
+      letter-spacing: 3px;
+
+      color:
+        rgba(150, 239, 255, .85);
+
+      text-transform: uppercase;
+    }
+
+
+    .substatus {
+
+      position: absolute;
+
+      top: calc(50% + min(31vw, 185px));
+
+      width: 100%;
+
+      text-align: center;
+
+      font-size: 10px;
+
+      letter-spacing: 2px;
+
+      color:
+        rgba(125, 210, 225, .45);
+
+      text-transform: uppercase;
+    }
+
+
+
+    /* ========================= */
+    /* STATES */
+    /* ========================= */
+
+    .hud.listening .core {
+
+      transform: scale(1.08);
+
+      box-shadow:
+
+        inset 0 0 50px
+        rgba(0, 225, 255, .35),
+
+        0 0 55px
+        rgba(0, 225, 255, .5);
+    }
+
+
+    .hud.listening .ring2 {
+
+      animation-duration: 3s;
+    }
+
+
+    .hud.listening .ring3 {
+
+      animation-duration: 2.2s;
+    }
+
+
+    .hud.thinking .core {
+
+      animation:
+        corePulse .75s ease-in-out infinite;
+    }
+
+
+    .hud.thinking .ring1 {
+
+      animation-duration: 4s;
+    }
+
+
+    .hud.thinking .ring2 {
+
+      animation-duration: 2.5s;
+    }
+
+
+    .hud.speaking .core {
+
+      animation:
+        speakingPulse .48s ease-in-out infinite;
+    }
+
+
+    .hud.speaking .ring4 {
+
+      animation-duration: 1.8s;
+    }
+
+
+
+    /* ========================= */
+    /* ANIMATIONS */
+    /* ========================= */
+
+    @keyframes spin {
+
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+
+    @keyframes reverseSpin {
+
+      from {
+        transform: rotate(360deg);
+      }
+
+      to {
+        transform: rotate(0deg);
+      }
+    }
+
+
+    @keyframes corePulse {
+
+      0%,
+      100% {
+        transform: scale(.98);
+      }
+
+      50% {
+        transform: scale(1.06);
+      }
+    }
+
+
+    @keyframes speakingPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: .88;
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+    }
+
+
+
+    /* ========================= */
+    /* START OVERLAY */
+    /* ========================= */
+
+    .startOverlay {
+
+      position: absolute;
+
+      inset: 0;
+
+      z-index: 30;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: flex-end;
+
+      padding-bottom:
+        calc(
+          55px + env(safe-area-inset-bottom)
+        );
+
+      pointer-events: none;
+    }
+
+
+    .startText {
+
+      font-size: 11px;
+
+      letter-spacing: 3px;
+
+      color:
+        rgba(138, 231, 246, .55);
+
+      text-transform: uppercase;
+
+      text-align: center;
+
+      transition: opacity .5s;
+    }
+
+
+    .initialized .startText {
+      opacity: 0;
+    }
+
+
+
+    /* ========================= */
+    /* SMALL SCREEN */
+    /* ========================= */
+
+    @media
+    (max-width: 420px) {
+
+      .hud {
+        width: 92vw;
+      }
+
+      .name {
+        font-size: 21px;
+      }
+
+    }
+
+  </style>
+
 </head>
+
+
 
 <body>
 
-<div id="app" class="app">
 
-  <div class="substatus">
-    PERSONAL INTELLIGENCE INTERFACE
-  </div>
+  <div
+    class="app"
+    id="app"
+  >
 
-  <div class="hud ready">
 
-    <div class="outer"></div>
+    <div
+      class="background-glow"
+    ></div>
 
-    <div class="ticks"></div>
 
-    <div class="ring1"></div>
+    <div
+      class="hud"
+      id="hud"
+    >
 
-    <div class="ring2"></div>
 
-    <div class="ring3"></div>
+      <div
+        class="ticks"
+      ></div>
 
-    <div class="ring4"></div>
 
-    <div class="innerTicks"></div>
+      <div
+        class="amber"
+      ></div>
 
-    <div class="core"></div>
 
-    <div class="name">
-      J.A.R.V.I.S.
+      <div
+        class="ring ring1"
+      ></div>
+
+
+      <div
+        class="ring ring2"
+      ></div>
+
+
+      <div
+        class="innerTicks"
+      ></div>
+
+
+      <div
+        class="ring ring3"
+      ></div>
+
+
+      <div
+        class="ring ring4"
+      ></div>
+
+
+      <div
+        class="core"
+      >
+
+        <div
+          class="name"
+        >
+          J.A.R.V.I.S.
+        </div>
+
+      </div>
+
+
     </div>
 
+
+
+    <div
+      class="status"
+      id="status"
+    >
+      TAP TO INITIALIZE
+    </div>
+
+
+    <div
+      class="substatus"
+      id="substatus"
+    >
+      VOICE SYSTEM OFFLINE
+    </div>
+
+
+
+    <div
+      class="startOverlay"
+    >
+
+      <div
+        class="startText"
+      >
+        TAP ANYWHERE TO START
+      </div>
+
+    </div>
+
+
   </div>
 
-  <div id="status" class="status">
-    TAP TO INITIALIZE
-  </div>
-
-</div>
 
 
 <script>
 
+
+/* ======================================= */
+/* JARVIS */
+/* ======================================= */
+
+
 const app =
-document.getElementById("app");
+  document.getElementById(
+    "app"
+  );
+
+
+const hud =
+  document.getElementById(
+    "hud"
+  );
+
 
 const statusText =
-document.getElementById("status");
-
-let recognition =
-null;
-
-let initialized =
-false;
-
-let listening =
-false;
-
-let speaking =
-false;
-
-let selectedVoice =
-null;
+  document.getElementById(
+    "status"
+  );
 
 
-/* --------------------------------
-   VOICE
--------------------------------- */
+const substatus =
+  document.getElementById(
+    "substatus"
+  );
 
-function findVoice(){
 
-  if(
-    !("speechSynthesis" in window)
-  ){
-    return;
-  }
+
+let initialized = false;
+
+let recognition = null;
+
+let recognitionRunning = false;
+
+let speaking = false;
+
+let processing = false;
+
+let wakeMode = true;
+
+let awake = false;
+
+let selectedVoice = null;
+
+let restartTimer = null;
+
+
+
+/* ======================================= */
+/* FIND BEST VOICE */
+/* ======================================= */
+
+
+function findVoice() {
 
   const voices =
-  speechSynthesis.getVoices();
+    speechSynthesis.getVoices();
+
 
   selectedVoice =
 
     voices.find(
-      v => /Daniel/i.test(v.name)
+      v =>
+        /Daniel/i.test(
+          v.name
+        )
     )
 
     ||
 
     voices.find(
-      v => /Arthur/i.test(v.name)
+      v =>
+        /Arthur/i.test(
+          v.name
+        )
     )
 
     ||
 
     voices.find(
-      v => /Oliver/i.test(v.name)
+      v =>
+        /Oliver/i.test(
+          v.name
+        )
     )
 
     ||
 
     voices.find(
-      v => v.lang === "en-GB"
+      v =>
+        /British/i.test(
+          v.name
+        )
     )
 
     ||
 
     voices.find(
-      v => /^en/i.test(v.lang)
+      v =>
+        v.lang ===
+        "en-GB"
     )
 
     ||
 
-    voices[0];
+    voices.find(
+      v =>
+        v.lang &&
+        v.lang.startsWith(
+          "en"
+        )
+    );
 
 }
 
 
-if(
-  "speechSynthesis" in window
-){
 
-  findVoice();
-
-  speechSynthesis.onvoiceschanged =
+speechSynthesis.onvoiceschanged =
   findVoice;
 
-}
+
+findVoice();
 
 
-/* --------------------------------
-   ADD "SIR"
--------------------------------- */
 
-function addSir(text){
+/* ======================================= */
+/* ADD SIR */
+/* ======================================= */
 
-  let clean =
-  String(text)
-  .trim()
-  .replace(/[.!?]+$/,"");
 
-  if(
-    /\bsir$/i.test(clean)
-  ){
-    return clean + ".";
+function addSir(text) {
+
+  if (!text) {
+    return "Yes, sir.";
   }
 
-  return clean + ", sir.";
+
+  let cleaned =
+    String(text)
+      .trim()
+      .replace(
+        /\s+/g,
+        " "
+      );
+
+
+  if (
+    /\bsir[.!?]*$/i.test(
+      cleaned
+    )
+  ) {
+
+    return cleaned;
+
+  }
+
+
+  cleaned =
+    cleaned.replace(
+      /[.!?]+$/,
+      ""
+    );
+
+
+  return (
+    cleaned +
+    ", sir."
+  );
 
 }
 
 
-/* --------------------------------
-   SPEAK RESPONSE
--------------------------------- */
 
-function speak(text){
+/* ======================================= */
+/* STOP RECOGNITION */
+/* ======================================= */
 
-  if(
-    !("speechSynthesis" in window)
-  ){
 
-    statusText.textContent =
-    "VOICE OUTPUT UNAVAILABLE";
+function stopRecognition() {
+
+  clearTimeout(
+    restartTimer
+  );
+
+
+  if (
+    recognition &&
+    recognitionRunning
+  ) {
+
+    try {
+
+      recognition.stop();
+
+    }
+
+    catch (e) {}
+
+  }
+
+
+  recognitionRunning =
+    false;
+
+}
+
+
+
+/* ======================================= */
+/* START WAKE LISTENING */
+/* ======================================= */
+
+
+function startRecognition() {
+
+  if (
+    !initialized ||
+    speaking ||
+    processing ||
+    recognitionRunning
+  ) {
 
     return;
 
   }
 
-  const finalText =
-  addSir(text);
+
+  if (!recognition) {
+    setupRecognition();
+  }
+
+
+  if (!recognition) {
+    return;
+  }
+
+
+  try {
+
+    recognition.start();
+
+  }
+
+  catch (e) {}
+
+}
+
+
+
+/* ======================================= */
+/* RESTART LISTENING */
+/* ======================================= */
+
+
+function restartListening(
+  delay = 500
+) {
+
+  clearTimeout(
+    restartTimer
+  );
+
+
+  if (!initialized) {
+    return;
+  }
+
+
+  restartTimer =
+    setTimeout(
+      () => {
+
+        startRecognition();
+
+      },
+      delay
+    );
+
+}
+
+
+
+/* ======================================= */
+/* SPEAK */
+/* ======================================= */
+
+
+function speak(
+  text,
+  keepAwake = false
+) {
+
+  stopRecognition();
+
 
   speechSynthesis.cancel();
 
-  const voice =
-  new SpeechSynthesisUtterance(
-    finalText
-  );
 
-  findVoice();
+  speaking = true;
 
-  if(
-    selectedVoice
-  ){
-    voice.voice =
-    selectedVoice;
-  }
 
-  voice.rate =
-  0.84;
-
-  voice.pitch =
-  0.82;
-
-  voice.volume =
-  1;
-
-  speaking =
-  true;
-
-  app.classList.remove(
-    "listening"
-  );
-
-  app.classList.remove(
+  hud.classList.remove(
+    "listening",
     "thinking"
   );
 
-  app.classList.add(
+
+  hud.classList.add(
     "speaking"
   );
 
+
   statusText.textContent =
-  "RESPONDING";
+    "SPEAKING";
 
-  voice.onend =
-  function(){
 
-    speaking =
-    false;
+  substatus.textContent =
+    "VOICE OUTPUT ACTIVE";
 
-    app.classList.remove(
-      "speaking"
+
+  const finalText =
+    addSir(
+      text
     );
 
-    statusText.textContent =
-    "TAP TO SPEAK";
 
-  };
-
-  voice.onerror =
-  function(){
-
-    speaking =
-    false;
-
-    app.classList.remove(
-      "speaking"
+  const utterance =
+    new SpeechSynthesisUtterance(
+      finalText
     );
 
-    statusText.textContent =
-    "VOICE OUTPUT ERROR";
 
-  };
+  findVoice();
+
+
+  if (selectedVoice) {
+
+    utterance.voice =
+      selectedVoice;
+
+  }
+
+
+  utterance.rate =
+    0.84;
+
+
+  utterance.pitch =
+    0.82;
+
+
+  utterance.volume =
+    1;
+
+
+  utterance.onend =
+    () => {
+
+      speaking =
+        false;
+
+
+      hud.classList.remove(
+        "speaking"
+      );
+
+
+      if (!keepAwake) {
+
+        awake =
+          false;
+
+      }
+
+
+      statusText.textContent =
+        wakeMode
+          ?
+          'WAITING FOR "HEY JARVIS"'
+          :
+          "LISTENING";
+
+
+      substatus.textContent =
+        wakeMode
+          ?
+          "WAKE WORD ACTIVE"
+          :
+          "VOICE SYSTEM ONLINE";
+
+
+      restartListening(
+        650
+      );
+
+    };
+
+
+  utterance.onerror =
+    () => {
+
+      speaking =
+        false;
+
+
+      hud.classList.remove(
+        "speaking"
+      );
+
+
+      restartListening(
+        600
+      );
+
+    };
+
 
   speechSynthesis.speak(
-    voice
+    utterance
   );
 
 }
 
 
-/* --------------------------------
-   OPENAI
--------------------------------- */
 
-async function askAI(message){
+/* ======================================= */
+/* THINKING */
+/* ======================================= */
 
-  statusText.textContent =
-  "THINKING";
 
-  app.classList.remove(
-    "listening"
+function thinkingOn() {
+
+  processing =
+    true;
+
+
+  stopRecognition();
+
+
+  hud.classList.remove(
+    "listening",
+    "speaking"
   );
 
-  app.classList.add(
+
+  hud.classList.add(
     "thinking"
   );
 
-  try{
+
+  statusText.textContent =
+    "THINKING";
+
+
+  substatus.textContent =
+    "PROCESSING REQUEST";
+
+}
+
+
+
+function thinkingOff() {
+
+  processing =
+    false;
+
+
+  hud.classList.remove(
+    "thinking"
+  );
+
+}
+
+
+
+/* ======================================= */
+/* ASK AI */
+/* ======================================= */
+
+
+async function askAI(
+  message
+) {
+
+  thinkingOn();
+
+
+  try {
+
 
     const response =
-    await fetch(
-      "/api/chat",
-      {
-        method:"POST",
+      await fetch(
+        "/api/chat",
+        {
 
-        headers:{
-          "Content-Type":
-          "application/json"
-        },
+          method:
+            "POST",
 
-        body:
-        JSON.stringify({
-          message:message
-        })
-      }
-    );
+          headers: {
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body:
+            JSON.stringify(
+              {
+                message:
+                  message
+              }
+            )
+
+        }
+      );
+
 
     const data =
-    await response.json();
+      await response.json();
 
-    app.classList.remove(
-      "thinking"
-    );
 
-    if(
-      !response.ok
-    ){
+    thinkingOff();
+
+
+    if (!response.ok) {
 
       console.log(
         data
       );
 
+
       speak(
         "I encountered a problem connecting to my intelligence system"
       );
 
-      return;
 
+      return;
     }
 
-    if(
-      data.reply
-    ){
+
+    if (!data.reply) {
 
       speak(
-        data.reply
+        "I did not receive a useful response"
       );
 
-      return;
 
+      return;
     }
 
+
     speak(
-      "I was unable to formulate a response"
+      data.reply
     );
 
   }
 
-  catch(error){
+
+  catch (error) {
+
 
     console.log(
       error
     );
 
-    app.classList.remove(
-      "thinking"
-    );
+
+    thinkingOff();
+
 
     speak(
       "I am unable to reach my intelligence system at the moment"
@@ -667,254 +1415,207 @@ async function askAI(message){
 }
 
 
-/* --------------------------------
-   RANDOM RESPONSE
--------------------------------- */
 
-function random(list){
-
-  return list[
-    Math.floor(
-      Math.random()
-      *
-      list.length
-    )
-  ];
-
-}
+/* ======================================= */
+/* TIME */
+/* ======================================= */
 
 
-/* --------------------------------
-   WEATHER
--------------------------------- */
+function tellTime() {
 
-function localWeather(){
+  const now =
+    new Date();
 
-  if(
-    !navigator.geolocation
-  ){
 
-    speak(
-      "Location services are unavailable"
+  const time =
+    now.toLocaleTimeString(
+      [],
+      {
+        hour:
+          "numeric",
+
+        minute:
+          "2-digit"
+      }
     );
 
-    return;
 
-  }
-
-  statusText.textContent =
-  "ACQUIRING LOCATION";
-
-  navigator
-  .geolocation
-  .getCurrentPosition(
-
-    position => {
-
-      getWeather(
-
-        position
-        .coords
-        .latitude,
-
-        position
-        .coords
-        .longitude,
-
-        "your location"
-
-      );
-
-    },
-
-    () => {
-
-      speak(
-        "Location permission was not granted"
-      );
-
-    },
-
-    {
-      enableHighAccuracy:false,
-      timeout:8000,
-      maximumAge:300000
-    }
-
+  speak(
+    `The time is ${time}`
   );
 
 }
 
 
-async function cityWeather(
-city
-){
 
-  statusText.textContent =
-  "ACCESSING WEATHER DATA";
+/* ======================================= */
+/* DATE */
+/* ======================================= */
 
-  try{
 
-    const request =
+function tellDate() {
 
-    await fetch(
+  const now =
+    new Date();
 
-      "https://geocoding-api.open-meteo.com/v1/search?name="
 
-      +
+  const date =
+    now.toLocaleDateString(
+      [],
+      {
 
-      encodeURIComponent(
-        city
-      )
+        weekday:
+          "long",
 
-      +
+        month:
+          "long",
 
-      "&count=1&language=en&format=json"
+        day:
+          "numeric"
 
+      }
     );
 
-    const data =
-    await request.json();
 
-    if(
-      !data.results
-      ||
-      !data.results.length
-    ){
+  speak(
+    `Today is ${date}`
+  );
 
-      speak(
-        "I could not locate " +
-        city
+}
+
+
+
+/* ======================================= */
+/* WEATHER */
+/* ======================================= */
+
+
+async function weatherByCity(
+  city
+) {
+
+  thinkingOn();
+
+
+  try {
+
+
+    const geo =
+      await fetch(
+
+        "https://geocoding-api.open-meteo.com/v1/search?name="
+
+        +
+
+        encodeURIComponent(
+          city
+        )
+
+        +
+
+        "&count=1&language=en&format=json"
+
       );
 
-      return;
 
+    const geoData =
+      await geo.json();
+
+
+    if (
+      !geoData.results ||
+      !geoData.results.length
+    ) {
+
+      thinkingOff();
+
+
+      speak(
+        `I couldn't locate ${city}`
+      );
+
+
+      return;
     }
 
+
     const place =
-    data.results[0];
-
-    getWeather(
-
-      place.latitude,
-
-      place.longitude,
-
-      place.name
-
-    );
-
-  }
-
-  catch(error){
-
-    speak(
-      "Weather data is currently unavailable"
-    );
-
-  }
-
-}
+      geoData.results[0];
 
 
-async function getWeather(
-latitude,
-longitude,
-name
-){
+    const latitude =
+      place.latitude;
 
-  try{
 
-    const request =
+    const longitude =
+      place.longitude;
 
-    await fetch(
-
-      "https://api.open-meteo.com/v1/forecast"
-
-      +
-
-      "?latitude=" +
-      latitude
-
-      +
-
-      "&longitude=" +
-      longitude
-
-      +
-
-      "&current=temperature_2m,apparent_temperature,wind_speed_10m"
-
-      +
-
-      "&temperature_unit=fahrenheit"
-
-      +
-
-      "&wind_speed_unit=mph"
-
-      +
-
-      "&timezone=auto"
-
-    );
-
-    const data =
-    await request.json();
 
     const weather =
-    data.current;
+      await fetch(
+
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,wind_speed_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto`
+
+      );
+
+
+    const weatherData =
+      await weather.json();
+
+
+    thinkingOff();
+
+
+    const current =
+      weatherData.current;
+
+
+    if (!current) {
+
+      speak(
+        "I couldn't retrieve the current weather"
+      );
+
+
+      return;
+    }
+
+
+    const temp =
+      Math.round(
+        current.temperature_2m
+      );
+
+
+    const feels =
+      Math.round(
+        current.apparent_temperature
+      );
+
+
+    const wind =
+      Math.round(
+        current.wind_speed_10m
+      );
+
 
     speak(
 
-      "Current conditions in "
-
-      +
-
-      name
-
-      +
-
-      " are "
-
-      +
-
-      Math.round(
-        weather.temperature_2m
-      )
-
-      +
-
-      " degrees Fahrenheit. It feels like "
-
-      +
-
-      Math.round(
-        weather.apparent_temperature
-      )
-
-      +
-
-      " degrees, with winds around "
-
-      +
-
-      Math.round(
-        weather.wind_speed_10m
-      )
-
-      +
-
-      " miles per hour"
+      `It is currently ${temp} degrees in ${place.name}, feels like ${feels}, with winds around ${wind} miles per hour`
 
     );
 
   }
 
-  catch(error){
+
+  catch (error) {
+
+
+    thinkingOff();
+
 
     speak(
-      "Weather information is currently unavailable"
+      "I couldn't retrieve the weather"
     );
 
   }
@@ -922,268 +1623,194 @@ name
 }
 
 
-/* --------------------------------
-   COMMANDS
--------------------------------- */
+
+/* ======================================= */
+/* PROCESS COMMAND */
+/* ======================================= */
+
 
 function processCommand(
-text
-){
+  input
+) {
 
-  const command =
-  text
-  .toLowerCase()
-  .trim();
+  let text =
+    input
+      .trim();
 
 
-  /* JARVIS */
+  if (!text) {
 
-  if(
+    awake =
+      false;
 
-    command === "jarvis"
 
-    ||
+    restartListening();
 
-    command.includes(
-      "hey jarvis"
-    )
-
-    ||
-
-    command.includes(
-      "hello jarvis"
-    )
-
-  ){
-
-    speak(
-
-      random([
-
-        "At your service",
-
-        "Yes",
-
-        "Standing by",
-
-        "How may I assist"
-
-      ])
-
-    );
 
     return;
-
   }
+
+
+  const lower =
+    text.toLowerCase();
+
+
+  /* GREETINGS */
+
+  if (
+    lower === "hello" ||
+    lower === "hi" ||
+    lower === "hey" ||
+    lower === "hello jarvis"
+  ) {
+
+    speak(
+      "Good evening. How may I assist you"
+    );
+
+
+    return;
+  }
+
 
 
   /* TIME */
 
-  if(
-    command.includes(
+  if (
+    lower.includes(
       "what time"
     )
-
     ||
+    lower === "time"
+    ||
+    lower.includes(
+      "current time"
+    )
+  ) {
 
-    command === "time"
-  ){
-
-    const time =
-
-    new Date()
-    .toLocaleTimeString(
-
-      [],
-
-      {
-        hour:"numeric",
-        minute:"2-digit"
-      }
-
-    );
-
-    speak(
-      "The time is " +
-      time
-    );
+    tellTime();
 
     return;
-
   }
+
 
 
   /* DATE */
 
-  if(
-
-    command.includes(
-      "what date"
-    )
-
-    ||
-
-    command.includes(
+  if (
+    lower.includes(
       "what day"
     )
-
     ||
-
-    command.includes(
-      "today's date"
+    lower.includes(
+      "what date"
     )
-
     ||
+    lower === "date"
+  ) {
 
-    command.includes(
-      "todays date"
-    )
-
-  ){
-
-    const date =
-
-    new Date()
-    .toLocaleDateString(
-
-      [],
-
-      {
-        weekday:"long",
-        month:"long",
-        day:"numeric",
-        year:"numeric"
-      }
-
-    );
-
-    speak(
-      "Today is " +
-      date
-    );
+    tellDate();
 
     return;
-
   }
 
-
-  /* WEATHER */
-
-  if(
-
-    command.includes(
-      "weather"
-    )
-
-    ||
-
-    command.includes(
-      "temperature"
-    )
-
-  ){
-
-    const match =
-
-    text.match(
-
-      /(?:weather|temperature)(?:\s+(?:in|for|at))\s+(.+)/i
-
-    );
-
-    if(
-      match
-    ){
-
-      cityWeather(
-        match[1]
-      );
-
-    }
-
-    else{
-
-      localWeather();
-
-    }
-
-    return;
-
-  }
 
 
   /* STATUS */
 
-  if(
-
-    command.includes(
+  if (
+    lower.includes(
       "system status"
     )
-
     ||
-
-    command.includes(
+    lower.includes(
       "status report"
     )
-
-    ||
-
-    command === "status"
-
-  ){
+  ) {
 
     speak(
-
-      random([
-
-        "All primary systems are online and functioning normally",
-
-        "All systems operational",
-
-        "No faults detected. Systems are stable"
-
-      ])
-
+      "All primary systems are online and functioning normally"
     );
 
-    return;
 
+    return;
   }
 
 
-  /* THANK YOU */
 
-  if(
+  /* THANKS */
 
-    command.includes(
+  if (
+    lower.includes(
       "thank you"
     )
-
     ||
-
-    command.includes(
+    lower.includes(
       "thanks"
     )
-
-  ){
+  ) {
 
     speak(
-
-      random([
-
-        "Always a pleasure",
-
-        "Of course",
-
-        "You're quite welcome"
-
-      ])
-
+      "Always a pleasure"
     );
+
+
+    return;
+  }
+
+
+
+  /* WEATHER */
+
+  if (
+    lower.includes(
+      "weather"
+    )
+  ) {
+
+
+    let city =
+      text
+        .replace(
+          /what('?s| is)? the weather( like)?/i,
+          ""
+        )
+
+        .replace(
+          /weather/i,
+          ""
+        )
+
+        .replace(
+          /\bin\b/i,
+          ""
+        )
+
+        .replace(
+          /\bfor\b/i,
+          ""
+        )
+
+        .trim();
+
+
+    if (!city) {
+
+      city =
+        "Missoula";
+
+    }
+
+
+    weatherByCity(
+      city
+    );
+
 
     return;
 
   }
+
 
 
   /* EVERYTHING ELSE GOES TO AI */
@@ -1195,27 +1822,192 @@ text
 }
 
 
-/* --------------------------------
-   MICROPHONE
--------------------------------- */
 
-function setupRecognition(){
-
-  const SpeechRecognition =
-
-  window.SpeechRecognition
-
-  ||
-
-  window.webkitSpeechRecognition;
+/* ======================================= */
+/* HANDLE HEARD SPEECH */
+/* ======================================= */
 
 
-  if(
-    !SpeechRecognition
-  ){
+function handleSpeech(
+  transcript
+) {
+
+  if (
+    speaking ||
+    processing
+  ) {
+
+    return;
+  }
+
+
+  let text =
+    transcript
+      .trim();
+
+
+  if (!text) {
+    return;
+  }
+
+
+  console.log(
+    "Heard:",
+    text
+  );
+
+
+  const lower =
+    text.toLowerCase();
+
+
+  /*
+  IF JARVIS IS ALREADY AWAKE
+  PROCESS WHATEVER HE HEARS
+  */
+
+  if (awake) {
+
+    awake =
+      false;
+
+
+    hud.classList.add(
+      "listening"
+    );
+
 
     statusText.textContent =
-    "VOICE INPUT UNAVAILABLE";
+      "COMMAND RECEIVED";
+
+
+    processCommand(
+      text
+    );
+
+
+    return;
+  }
+
+
+
+  /*
+  WAKE WORD:
+  "HEY JARVIS"
+  "JARVIS"
+  */
+
+
+  const wakeMatch =
+    lower.match(
+      /\b(?:hey\s+)?jarvis\b/i
+    );
+
+
+  if (!wakeMatch) {
+
+    statusText.textContent =
+      'WAITING FOR "HEY JARVIS"';
+
+
+    substatus.textContent =
+      "WAKE WORD ACTIVE";
+
+
+    return;
+  }
+
+
+
+  let command =
+    text
+      .replace(
+        /\b(?:hey\s+)?jarvis\b/i,
+        ""
+      )
+
+      .replace(
+        /^[,\s]+/,
+        ""
+      )
+
+      .trim();
+
+
+
+  /*
+  USER SAID:
+  "HEY JARVIS, WHAT TIME IS IT?"
+  */
+
+  if (command) {
+
+    awake =
+      false;
+
+
+    hud.classList.add(
+      "listening"
+    );
+
+
+    statusText.textContent =
+      "COMMAND RECEIVED";
+
+
+    processCommand(
+      command
+    );
+
+
+    return;
+  }
+
+
+
+  /*
+  USER ONLY SAID:
+  "HEY JARVIS"
+  */
+
+
+  awake =
+    true;
+
+
+  speak(
+    "Yes",
+    true
+  );
+
+}
+
+
+
+/* ======================================= */
+/* SPEECH RECOGNITION */
+/* ======================================= */
+
+
+function setupRecognition() {
+
+
+  const Recognition =
+    window.SpeechRecognition
+    ||
+    window.webkitSpeechRecognition;
+
+
+  if (!Recognition) {
+
+
+    statusText.textContent =
+      "VOICE NOT SUPPORTED";
+
+
+    substatus.textContent =
+      "OPEN IN SAFARI";
+
 
     return;
 
@@ -1223,197 +2015,346 @@ function setupRecognition(){
 
 
   recognition =
-  new SpeechRecognition();
+    new Recognition();
 
 
   recognition.lang =
-  "en-US";
-
-
-  recognition.interimResults =
-  false;
+    "en-US";
 
 
   recognition.continuous =
-  false;
+    true;
+
+
+  recognition.interimResults =
+    false;
 
 
   recognition.maxAlternatives =
-  1;
+    1;
+
 
 
   recognition.onstart =
-  function(){
-
-    listening =
-    true;
+    () => {
 
 
-    app.classList.add(
-      "listening"
-    );
+      recognitionRunning =
+        true;
 
 
-    statusText.textContent =
-    "LISTENING";
+      if (
+        !speaking &&
+        !processing
+      ) {
 
-  };
+
+        hud.classList.add(
+          "listening"
+        );
+
+
+        statusText.textContent =
+          awake
+            ?
+            "LISTENING"
+            :
+            'WAITING FOR "HEY JARVIS"';
+
+
+        substatus.textContent =
+          awake
+            ?
+            "AWAITING COMMAND"
+            :
+            "WAKE WORD ACTIVE";
+
+      }
+
+    };
+
 
 
   recognition.onresult =
-  function(event){
-
-    const text =
-
-    event
-    .results[0][0]
-    .transcript;
+    event => {
 
 
-    processCommand(
-      text
-    );
+      const last =
+        event.results.length - 1;
 
-  };
+
+      const result =
+        event.results[last];
+
+
+      if (!result.isFinal) {
+        return;
+      }
+
+
+      const transcript =
+        result[0]
+          .transcript;
+
+
+      handleSpeech(
+        transcript
+      );
+
+    };
+
 
 
   recognition.onerror =
-  function(event){
-
-    listening =
-    false;
+    event => {
 
 
-    app.classList.remove(
-      "listening"
-    );
+      console.log(
+        "Speech error:",
+        event.error
+      );
 
 
-    if(
-      event.error ===
-      "not-allowed"
-    ){
-
-      statusText.textContent =
-      "ALLOW MICROPHONE ACCESS";
-
-      return;
-
-    }
+      recognitionRunning =
+        false;
 
 
-    statusText.textContent =
-    "TAP TO SPEAK";
+      if (
+        event.error ===
+        "not-allowed"
+      ) {
 
-  };
+
+        statusText.textContent =
+          "MICROPHONE BLOCKED";
+
+
+        substatus.textContent =
+          "ALLOW MICROPHONE ACCESS";
+
+
+        return;
+
+      }
+
+
+      if (
+        event.error ===
+        "audio-capture"
+      ) {
+
+
+        statusText.textContent =
+          "MICROPHONE ERROR";
+
+
+        substatus.textContent =
+          "CHECK MICROPHONE";
+
+
+        return;
+
+      }
+
+
+      if (
+        initialized &&
+        !speaking &&
+        !processing
+      ) {
+
+
+        restartListening(
+          900
+        );
+
+      }
+
+    };
+
 
 
   recognition.onend =
-  function(){
-
-    listening =
-    false;
+    () => {
 
 
-    app.classList.remove(
-      "listening"
-    );
+      recognitionRunning =
+        false;
 
 
-    if(
-      !speaking
-    ){
-
-      statusText.textContent =
-      "TAP TO SPEAK";
-
-    }
-
-  };
-
-}
+      hud.classList.remove(
+        "listening"
+      );
 
 
-/* --------------------------------
-   LISTEN
--------------------------------- */
-
-function listen(){
-
-  if(
-    !recognition
-  ){
-
-    setupRecognition();
-
-  }
+      if (
+        initialized &&
+        !speaking &&
+        !processing
+      ) {
 
 
-  if(
+        restartListening(
+          500
+        );
 
-    !recognition
+      }
 
-    ||
-
-    listening
-
-    ||
-
-    speaking
-
-  ){
-
-    return;
-
-  }
-
-
-  try{
-
-    recognition.start();
-
-  }
-
-  catch(error){}
+    };
 
 }
 
 
-/* --------------------------------
-   TAP SCREEN
--------------------------------- */
 
-app.addEventListener(
-"click",
-function(){
-
-  if(
-    !initialized
-  ){
-
-    initialized =
-    true;
+/* ======================================= */
+/* INITIALIZE JARVIS */
+/* ======================================= */
 
 
-    setupRecognition();
+function initializeJarvis() {
+
+
+  if (initialized) {
+
+    /*
+    MANUAL TAP STILL WORKS
+    */
+
+    awake =
+      true;
 
 
     speak(
-      "JARVIS online. All systems standing by"
+      "Yes",
+      true
     );
 
 
     return;
-
   }
 
 
-  listen();
+  initialized =
+    true;
+
+
+  app.classList.add(
+    "initialized"
+  );
+
+
+  setupRecognition();
+
+
+  /*
+  ASK FOR MIC ACCESS
+  */
+
+
+  startRecognition();
+
+
+  speak(
+    "JARVIS online. Voice wake system activated"
+  );
+
+
+  statusText.textContent =
+    'WAITING FOR "HEY JARVIS"';
+
+
+  substatus.textContent =
+    "WAKE WORD ACTIVE";
 
 }
+
+
+
+/* ======================================= */
+/* TAP ANYWHERE */
+/* ======================================= */
+
+
+app.addEventListener(
+  "click",
+  initializeJarvis
 );
+
+
+
+/* ======================================= */
+/* RETURN FROM BACKGROUND */
+/* ======================================= */
+
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+
+    if (
+      document.visibilityState ===
+      "visible"
+      &&
+      initialized
+      &&
+      !speaking
+      &&
+      !processing
+    ) {
+
+
+      restartListening(
+        700
+      );
+
+    }
+
+
+    else if (
+      document.visibilityState ===
+      "hidden"
+    ) {
+
+
+      stopRecognition();
+
+    }
+
+  }
+);
+
+
+
+/* ======================================= */
+/* KEEP SCREEN STATE READY */
+/* ======================================= */
+
+
+window.addEventListener(
+  "pageshow",
+  () => {
+
+
+    if (
+      initialized
+    ) {
+
+
+      restartListening(
+        700
+      );
+
+    }
+
+  }
+);
+
+
 
 </script>
 
+
 </body>
+
 </html>
