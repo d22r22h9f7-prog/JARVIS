@@ -2,48 +2,23 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
 
   <meta
     name="viewport"
-    content="width=device-width,
-    initial-scale=1.0,
-    maximum-scale=1.0,
-    user-scalable=no,
-    viewport-fit=cover"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
   >
 
   <title>JARVIS</title>
 
-  <link
-    rel="apple-touch-icon"
-    href="/apple-touch-icon.png"
-  >
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
-  >
-
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
-  >
-
-  <meta
-    name="apple-mobile-web-app-title"
-    content="JARVIS"
-  >
-
-  <meta
-    name="theme-color"
-    content="#02090e"
-  >
-
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="JARVIS">
+  <meta name="theme-color" content="#02090e">
 
   <style>
-
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
@@ -55,7 +30,6 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-
       background:
         radial-gradient(
           circle at center,
@@ -64,12 +38,7 @@
           #01070b 70%,
           #000 100%
         );
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+      font-family: Arial, Helvetica, sans-serif;
       color: #aef7ff;
     }
 
@@ -78,30 +47,22 @@
     }
 
     .app {
-
       width: 100%;
       height: 100dvh;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       position: relative;
       overflow: hidden;
-
       touch-action: manipulation;
       cursor: pointer;
     }
 
     .background-glow {
-
       position: absolute;
-
       width: 700px;
       height: 700px;
-
       border-radius: 50%;
-
       background:
         radial-gradient(
           circle,
@@ -109,15 +70,11 @@
           rgba(0, 155, 210, .05) 40%,
           transparent 70%
         );
-
       filter: blur(15px);
-
-      animation:
-        backgroundPulse 4s ease-in-out infinite;
+      animation: backgroundPulse 4s ease-in-out infinite;
     }
 
     @keyframes backgroundPulse {
-
       0%,
       100% {
         transform: scale(.95);
@@ -131,37 +88,28 @@
     }
 
     .hud {
-
       position: relative;
-
       width: min(88vw, 520px);
       aspect-ratio: 1 / 1;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       filter:
         drop-shadow(
-          0 0 20px
-          rgba(0, 220, 255, .25)
+          0 0 20px rgba(0, 220, 255, .25)
         );
     }
 
     .ticks {
-
       position: absolute;
       inset: 0;
-
       border-radius: 50%;
 
       background:
         repeating-conic-gradient(
           from 0deg,
-          rgba(88, 235, 255, .8)
-          0deg 1deg,
-          transparent
-          1deg 4deg
+          rgba(88, 235, 255, .8) 0deg 1deg,
+          transparent 1deg 4deg
         );
 
       mask:
@@ -185,107 +133,76 @@
         );
 
       opacity: .65;
-
-      animation:
-        spin 38s linear infinite;
+      animation: spin 38s linear infinite;
     }
 
     .ring {
-
       position: absolute;
-
       border-radius: 50%;
-
       border-style: solid;
-
       box-shadow:
         inset 0 0 18px rgba(0, 217, 255, .08),
         0 0 18px rgba(0, 217, 255, .08);
     }
 
     .ring1 {
-
       width: 92%;
       height: 92%;
-
       border-width: 2px;
-
       border-color:
         rgba(55, 222, 255, .7)
         rgba(55, 222, 255, .18)
         rgba(55, 222, 255, .7)
         rgba(55, 222, 255, .18);
-
-      animation:
-        spin 18s linear infinite;
+      animation: spin 18s linear infinite;
     }
 
     .ring2 {
-
       width: 77%;
       height: 77%;
-
       border-width: 4px;
-
       border-color:
         rgba(0, 205, 245, .85)
         transparent
         rgba(0, 205, 245, .3)
         transparent;
-
-      animation:
-        reverseSpin 14s linear infinite;
+      animation: reverseSpin 14s linear infinite;
     }
 
     .ring3 {
-
       width: 63%;
       height: 63%;
-
       border-width: 2px;
-
       border-color:
         rgba(119, 244, 255, .32)
         rgba(119, 244, 255, .8)
         rgba(119, 244, 255, .32)
         rgba(119, 244, 255, .8);
-
-      animation:
-        spin 9s linear infinite;
+      animation: spin 9s linear infinite;
     }
 
     .ring4 {
-
       width: 48%;
       height: 48%;
-
       border-width: 5px;
-
       border-color:
         rgba(97, 242, 255, .85)
         rgba(97, 242, 255, .15)
         rgba(97, 242, 255, .85)
         rgba(97, 242, 255, .15);
-
-      animation:
-        reverseSpin 7s linear infinite;
+      animation: reverseSpin 7s linear infinite;
     }
 
     .innerTicks {
-
       position: absolute;
-
       width: 70%;
       height: 70%;
-
       border-radius: 50%;
 
       background:
         repeating-conic-gradient(
-          rgba(78, 232, 255, .75)
-          0deg .7deg,
-          transparent
-          .7deg 5deg
+          rgba(78, 232, 255, .75) 0deg .7deg,
+          transparent .7deg 5deg
         );
 
       mask:
@@ -309,43 +226,26 @@
         );
 
       opacity: .7;
-
-      animation:
-        reverseSpin 24s linear infinite;
+      animation: reverseSpin 24s linear infinite;
     }
 
     .amber {
-
       position: absolute;
-
       width: 88%;
       height: 88%;
-
       border-radius: 50%;
-
-      border:
-        4px solid transparent;
-
-      border-left-color:
-        rgba(255, 172, 43, .9);
-
-      transform:
-        rotate(25deg);
-
+      border: 4px solid transparent;
+      border-left-color: rgba(255, 172, 43, .9);
+      transform: rotate(25deg);
       opacity: .65;
-
       filter:
         drop-shadow(
-          0 0 6px
-          rgba(255, 170, 40, .5)
+          0 0 6px rgba(255, 170, 40, .5)
         );
-
-      animation:
-        amberMove 7s ease-in-out infinite;
+      animation: amberMove 7s ease-in-out infinite;
     }
 
     @keyframes amberMove {
-
       0%,
       100% {
         transform: rotate(15deg);
@@ -357,19 +257,14 @@
     }
 
     .core {
-
       position: absolute;
-
       width: 37%;
       height: 37%;
-
       border-radius: 50%;
-
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-
       text-align: center;
 
       background:
@@ -380,90 +275,65 @@
           rgba(0, 10, 15, .8) 72%
         );
 
-      border:
-        1px solid
-        rgba(123, 244, 255, .55);
+      border: 1px solid rgba(123, 244, 255, .55);
 
       box-shadow:
-        inset 0 0 32px
-        rgba(0, 220, 255, .17),
-        0 0 30px
-        rgba(0, 220, 255, .2);
+        inset 0 0 32px rgba(0, 220, 255, .17),
+        0 0 30px rgba(0, 220, 255, .2);
 
       z-index: 10;
-
-      transition:
-        .3s ease;
+      transition: .3s ease;
     }
 
     .name {
-
-      font-size:
-        clamp(18px, 5vw, 34px);
-
+      font-size: clamp(18px, 5vw, 34px);
       font-weight: 300;
-
-      letter-spacing:
-        clamp(2px, 1vw, 7px);
-
+      letter-spacing: clamp(2px, 1vw, 7px);
       color: #b9faff;
-
       text-shadow:
-        0 0 12px
-        rgba(80, 235, 255, .7);
-
+        0 0 12px rgba(80, 235, 255, .7);
       margin-left: 5px;
     }
 
     .status {
-
       position: absolute;
-
       top: calc(50% + min(27vw, 155px));
-
       width: 100%;
-
       text-align: center;
-
       font-size: 13px;
-
       letter-spacing: 3px;
-
-      color:
-        rgba(150, 239, 255, .85);
-
+      color: rgba(150, 239, 255, .85);
       text-transform: uppercase;
     }
 
     .substatus {
-
       position: absolute;
-
       top: calc(50% + min(31vw, 185px));
-
       width: 100%;
-
       text-align: center;
-
       font-size: 10px;
-
       letter-spacing: 2px;
+      color: rgba(125, 210, 225, .45);
+      text-transform: uppercase;
+    }
 
-      color:
-        rgba(125, 210, 225, .45);
-
+    .tapHint {
+      position: absolute;
+      bottom: calc(45px + env(safe-area-inset-bottom));
+      width: 100%;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: rgba(138, 231, 246, .55);
       text-transform: uppercase;
     }
 
     .hud.listening .core {
-
       transform: scale(1.08);
 
       box-shadow:
-        inset 0 0 50px
-        rgba(0, 225, 255, .35),
-        0 0 55px
-        rgba(0, 225, 255, .5);
+        inset 0 0 50px rgba(0, 225, 255, .35),
+        0 0 55px rgba(0, 225, 255, .5);
     }
 
     .hud.listening .ring2 {
@@ -475,9 +345,7 @@
     }
 
     .hud.thinking .core {
-
-      animation:
-        corePulse .75s ease-in-out infinite;
+      animation: corePulse .75s ease-in-out infinite;
     }
 
     .hud.thinking .ring1 {
@@ -489,9 +357,7 @@
     }
 
     .hud.speaking .core {
-
-      animation:
-        speakingPulse .48s ease-in-out infinite;
+      animation: speakingPulse .48s ease-in-out infinite;
     }
 
     .hud.speaking .ring4 {
@@ -499,7 +365,6 @@
     }
 
     @keyframes spin {
-
       from {
         transform: rotate(0deg);
       }
@@ -510,7 +375,6 @@
     }
 
     @keyframes reverseSpin {
-
       from {
         transform: rotate(360deg);
       }
@@ -521,7 +385,6 @@
     }
 
     @keyframes corePulse {
-
       0%,
       100% {
         transform: scale(.98);
@@ -533,7 +396,6 @@
     }
 
     @keyframes speakingPulse {
-
       0%,
       100% {
         transform: scale(1);
@@ -546,32 +408,7 @@
       }
     }
 
-    .tapHint {
-
-      position: absolute;
-
-      bottom:
-        calc(
-          45px + env(safe-area-inset-bottom)
-        );
-
-      width: 100%;
-
-      text-align: center;
-
-      font-size: 11px;
-
-      letter-spacing: 3px;
-
-      color:
-        rgba(138, 231, 246, .55);
-
-      text-transform: uppercase;
-    }
-
-    @media
-    (max-width: 420px) {
-
+    @media (max-width: 420px) {
       .hud {
         width: 92vw;
       }
@@ -579,127 +416,68 @@
       .name {
         font-size: 21px;
       }
-
     }
-
   </style>
-
 </head>
-
-
 
 <body>
 
+  <div class="app" id="app">
 
-  <div
-    class="app"
-    id="app"
-  >
+    <div class="background-glow"></div>
 
-    <div
-      class="background-glow"
-    ></div>
+    <div class="hud" id="hud">
 
+      <div class="ticks"></div>
 
-    <div
-      class="hud"
-      id="hud"
-    >
+      <div class="amber"></div>
 
-      <div
-        class="ticks"
-      ></div>
+      <div class="ring ring1"></div>
 
-      <div
-        class="amber"
-      ></div>
+      <div class="ring ring2"></div>
 
-      <div
-        class="ring ring1"
-      ></div>
+      <div class="innerTicks"></div>
 
-      <div
-        class="ring ring2"
-      ></div>
+      <div class="ring ring3"></div>
 
-      <div
-        class="innerTicks"
-      ></div>
+      <div class="ring ring4"></div>
 
-      <div
-        class="ring ring3"
-      ></div>
-
-      <div
-        class="ring ring4"
-      ></div>
-
-      <div
-        class="core"
-      >
-
-        <div
-          class="name"
-        >
+      <div class="core">
+        <div class="name">
           J.A.R.V.I.S.
         </div>
-
       </div>
 
     </div>
 
-
-    <div
-      class="status"
-      id="status"
-    >
+    <div class="status" id="status">
       TAP TO SPEAK
     </div>
 
-
-    <div
-      class="substatus"
-      id="substatus"
-    >
+    <div class="substatus" id="substatus">
       VOICE SYSTEM READY
     </div>
 
-
-    <div
-      class="tapHint"
-    >
+    <div class="tapHint">
       TAP ANYWHERE
     </div>
 
   </div>
 
 
-
 <script>
 
-
 const app =
-  document.getElementById(
-    "app"
-  );
-
+  document.getElementById("app");
 
 const hud =
-  document.getElementById(
-    "hud"
-  );
-
+  document.getElementById("hud");
 
 const statusText =
-  document.getElementById(
-    "status"
-  );
-
+  document.getElementById("status");
 
 const substatus =
-  document.getElementById(
-    "substatus"
-  );
+  document.getElementById("substatus");
 
 
 let recognition = null;
@@ -712,61 +490,47 @@ let processing = false;
 
 let selectedVoice = null;
 
+let currentUtterance = null;
 
 
 /* ========================= */
 /* FIND VOICE */
 /* ========================= */
 
-
 function findVoice() {
 
   const voices =
-    speechSynthesis.getVoices();
+    window.speechSynthesis
+      ? speechSynthesis.getVoices()
+      : [];
 
 
   selectedVoice =
 
     voices.find(
       v =>
-        /Daniel/i.test(
-          v.name
-        )
+        /Daniel/i.test(v.name)
     )
 
     ||
 
     voices.find(
       v =>
-        /Arthur/i.test(
-          v.name
-        )
+        /Arthur/i.test(v.name)
     )
 
     ||
 
     voices.find(
       v =>
-        /Oliver/i.test(
-          v.name
-        )
+        /Oliver/i.test(v.name)
     )
 
     ||
 
     voices.find(
       v =>
-        /British/i.test(
-          v.name
-        )
-    )
-
-    ||
-
-    voices.find(
-      v =>
-        v.lang ===
-        "en-GB"
+        v.lang === "en-GB"
     )
 
     ||
@@ -774,26 +538,29 @@ function findVoice() {
     voices.find(
       v =>
         v.lang &&
-        v.lang.startsWith(
-          "en"
-        )
-    );
+        v.lang.startsWith("en")
+    )
+
+    ||
+
+    null;
 
 }
 
 
-speechSynthesis.onvoiceschanged =
-  findVoice;
+if ("speechSynthesis" in window) {
 
+  speechSynthesis.onvoiceschanged =
+    findVoice;
 
-findVoice();
+  findVoice();
 
+}
 
 
 /* ========================= */
 /* ADD SIR */
 /* ========================= */
-
 
 function addSir(text) {
 
@@ -801,26 +568,16 @@ function addSir(text) {
     return "Yes, sir.";
   }
 
-
   let cleaned =
     String(text)
       .trim()
-      .replace(
-        /\s+/g,
-        " "
-      );
-
+      .replace(/\s+/g, " ");
 
   if (
-    /\bsir[.!?]*$/i.test(
-      cleaned
-    )
+    /\bsir[.!?]*$/i.test(cleaned)
   ) {
-
     return cleaned;
-
   }
-
 
   cleaned =
     cleaned.replace(
@@ -828,151 +585,219 @@ function addSir(text) {
       ""
     );
 
-
-  return (
-    cleaned +
-    ", sir."
-  );
+  return cleaned + ", sir.";
 
 }
 
+
+/* ========================= */
+/* RESET SCREEN */
+/* ========================= */
+
+function readyState() {
+
+  listening = false;
+  speaking = false;
+  processing = false;
+
+  hud.classList.remove(
+    "listening",
+    "thinking",
+    "speaking"
+  );
+
+  statusText.textContent =
+    "TAP TO SPEAK";
+
+  substatus.textContent =
+    "VOICE SYSTEM READY";
+
+}
 
 
 /* ========================= */
 /* SPEAK */
 /* ========================= */
 
-
 function speak(text) {
 
-  speechSynthesis.cancel();
+  if (
+    !("speechSynthesis" in window)
+  ) {
+
+    readyState();
+
+    statusText.textContent =
+      "VOICE OUTPUT UNAVAILABLE";
+
+    return;
+  }
 
 
   speaking = true;
-
 
   hud.classList.remove(
     "listening",
     "thinking"
   );
 
-
   hud.classList.add(
     "speaking"
   );
 
-
   statusText.textContent =
-    "SPEAKING";
-
+    "VOICE OUTPUT";
 
   substatus.textContent =
-    "VOICE OUTPUT ACTIVE";
+    "PREPARING RESPONSE";
 
 
-  const utterance =
-    new SpeechSynthesisUtterance(
-      addSir(text)
-    );
-
-
-  findVoice();
-
-
-  if (selectedVoice) {
-
-    utterance.voice =
-      selectedVoice;
-
+  try {
+    speechSynthesis.cancel();
   }
+  catch (e) {}
 
 
-  utterance.rate =
-    0.84;
+  const spokenText =
+    addSir(text);
 
 
-  utterance.pitch =
-    0.82;
+  /*
+  IMPORTANT:
+  Wait for microphone / speech recognition
+  to fully release before starting speech.
+  */
 
+  setTimeout(() => {
 
-  utterance.volume =
-    1;
-
-
-  utterance.onend =
-    () => {
-
-      speaking = false;
-
-
-      hud.classList.remove(
-        "speaking"
+    currentUtterance =
+      new SpeechSynthesisUtterance(
+        spokenText
       );
 
 
-      statusText.textContent =
-        "TAP TO SPEAK";
+    findVoice();
 
 
-      substatus.textContent =
-        "VOICE SYSTEM READY";
+    if (selectedVoice) {
 
-    };
+      currentUtterance.voice =
+        selectedVoice;
+
+      currentUtterance.lang =
+        selectedVoice.lang || "en-GB";
+
+    }
+    else {
+
+      currentUtterance.lang =
+        "en-GB";
+
+    }
 
 
-  utterance.onerror =
-    () => {
+    currentUtterance.rate =
+      0.86;
 
-      speaking = false;
+    currentUtterance.pitch =
+      0.88;
+
+    currentUtterance.volume =
+      1;
 
 
-      hud.classList.remove(
-        "speaking"
+    currentUtterance.onstart =
+      () => {
+
+        speaking = true;
+
+        statusText.textContent =
+          "SPEAKING";
+
+        substatus.textContent =
+          "VOICE OUTPUT ACTIVE";
+
+      };
+
+
+    currentUtterance.onend =
+      () => {
+
+        currentUtterance = null;
+
+        readyState();
+
+      };
+
+
+    currentUtterance.onerror =
+      event => {
+
+        console.log(
+          "Speech output error:",
+          event
+        );
+
+        currentUtterance = null;
+
+        readyState();
+
+      };
+
+
+    try {
+
+      /*
+      Safari can occasionally leave synthesis paused.
+      */
+
+      if (speechSynthesis.paused) {
+        speechSynthesis.resume();
+      }
+
+      speechSynthesis.speak(
+        currentUtterance
       );
 
+    }
 
-      statusText.textContent =
-        "TAP TO SPEAK";
+    catch (error) {
 
+      console.log(
+        "Speech error:",
+        error
+      );
 
-      substatus.textContent =
-        "VOICE SYSTEM READY";
+      currentUtterance = null;
 
-    };
+      readyState();
 
+    }
 
-  speechSynthesis.speak(
-    utterance
-  );
+  }, 550);
 
 }
-
 
 
 /* ========================= */
 /* THINKING */
 /* ========================= */
 
-
 function thinkingOn() {
 
   processing = true;
-
 
   hud.classList.remove(
     "listening",
     "speaking"
   );
 
-
   hud.classList.add(
     "thinking"
   );
 
-
   statusText.textContent =
     "THINKING";
-
 
   substatus.textContent =
     "PROCESSING REQUEST";
@@ -984,7 +809,6 @@ function thinkingOff() {
 
   processing = false;
 
-
   hud.classList.remove(
     "thinking"
   );
@@ -992,43 +816,31 @@ function thinkingOff() {
 }
 
 
-
 /* ========================= */
 /* ASK AI */
 /* ========================= */
-
 
 async function askAI(message) {
 
   thinkingOn();
 
-
   try {
-
 
     const response =
       await fetch(
         "/api/chat",
         {
-
-          method:
-            "POST",
+          method: "POST",
 
           headers: {
-
             "Content-Type":
               "application/json"
-
           },
 
           body:
-            JSON.stringify(
-              {
-                message:
-                  message
-              }
-            )
-
+            JSON.stringify({
+              message: message
+            })
         }
       );
 
@@ -1042,17 +854,14 @@ async function askAI(message) {
 
     if (!response.ok) {
 
-      console.log(
-        data
-      );
-
+      console.log(data);
 
       speak(
         "I encountered a problem connecting to my intelligence system"
       );
 
-
       return;
+
     }
 
 
@@ -1062,28 +871,27 @@ async function askAI(message) {
         "I did not receive a useful response"
       );
 
-
       return;
+
     }
 
 
-    speak(
-      data.reply
+    /*
+    SHORT PAUSE BEFORE SPEAKING
+    */
+
+    setTimeout(
+      () => speak(data.reply),
+      200
     );
 
   }
 
-
   catch (error) {
 
-
-    console.log(
-      error
-    );
-
+    console.log(error);
 
     thinkingOff();
-
 
     speak(
       "I am unable to reach my intelligence system at the moment"
@@ -1094,30 +902,23 @@ async function askAI(message) {
 }
 
 
-
 /* ========================= */
 /* TIME */
 /* ========================= */
-
 
 function tellTime() {
 
   const now =
     new Date();
 
-
   const time =
     now.toLocaleTimeString(
       [],
       {
-        hour:
-          "numeric",
-
-        minute:
-          "2-digit"
+        hour: "numeric",
+        minute: "2-digit"
       }
     );
-
 
   speak(
     `The time is ${time}`
@@ -1126,35 +927,24 @@ function tellTime() {
 }
 
 
-
 /* ========================= */
 /* DATE */
 /* ========================= */
-
 
 function tellDate() {
 
   const now =
     new Date();
 
-
   const date =
     now.toLocaleDateString(
       [],
       {
-
-        weekday:
-          "long",
-
-        month:
-          "long",
-
-        day:
-          "numeric"
-
+        weekday: "long",
+        month: "long",
+        day: "numeric"
       }
     );
-
 
   speak(
     `Today is ${date}`
@@ -1163,37 +953,23 @@ function tellDate() {
 }
 
 
-
 /* ========================= */
 /* WEATHER */
 /* ========================= */
 
-
-async function weatherByCity(
-  city
-) {
+async function weatherByCity(city) {
 
   thinkingOn();
 
-
   try {
-
 
     const geo =
       await fetch(
-
         "https://geocoding-api.open-meteo.com/v1/search?name="
-
         +
-
-        encodeURIComponent(
-          city
-        )
-
+        encodeURIComponent(city)
         +
-
         "&count=1&language=en&format=json"
-
       );
 
 
@@ -1208,13 +984,12 @@ async function weatherByCity(
 
       thinkingOff();
 
-
       speak(
         `I couldn't locate ${city}`
       );
 
-
       return;
+
     }
 
 
@@ -1222,19 +997,9 @@ async function weatherByCity(
       geoData.results[0];
 
 
-    const latitude =
-      place.latitude;
-
-
-    const longitude =
-      place.longitude;
-
-
     const weather =
       await fetch(
-
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,wind_speed_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto`
-
+        `https://api.open-meteo.com/v1/forecast?latitude=${place.latitude}&longitude=${place.longitude}&current=temperature_2m,apparent_temperature,wind_speed_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto`
       );
 
 
@@ -1255,8 +1020,8 @@ async function weatherByCity(
         "I couldn't retrieve the current weather"
       );
 
-
       return;
+
     }
 
 
@@ -1279,19 +1044,16 @@ async function weatherByCity(
 
 
     speak(
-
       `It is currently ${temp} degrees in ${place.name}, feels like ${feels}, with winds around ${wind} miles per hour`
-
     );
 
   }
 
-
   catch (error) {
 
+    console.log(error);
 
     thinkingOff();
-
 
     speak(
       "I couldn't retrieve the weather"
@@ -1302,11 +1064,9 @@ async function weatherByCity(
 }
 
 
-
 /* ========================= */
 /* PROCESS COMMAND */
 /* ========================= */
-
 
 function processCommand(input) {
 
@@ -1316,21 +1076,15 @@ function processCommand(input) {
 
   if (!text) {
 
-    statusText.textContent =
-      "TAP TO SPEAK";
-
-
-    substatus.textContent =
-      "VOICE SYSTEM READY";
-
+    readyState();
 
     return;
+
   }
 
 
   const lower =
     text.toLowerCase();
-
 
 
   if (
@@ -1340,48 +1094,37 @@ function processCommand(input) {
     ||
     lower === "hey"
     ||
-    lower.includes(
-      "hello jarvis"
-    )
+    lower.includes("hello jarvis")
   ) {
 
     speak(
       "Good evening. How may I assist you"
     );
 
-
     return;
+
   }
 
 
-
   if (
-    lower.includes(
-      "what time"
-    )
+    lower.includes("what time")
     ||
     lower === "time"
     ||
-    lower.includes(
-      "current time"
-    )
+    lower.includes("current time")
   ) {
 
     tellTime();
 
     return;
+
   }
 
 
-
   if (
-    lower.includes(
-      "what day"
-    )
+    lower.includes("what day")
     ||
-    lower.includes(
-      "what date"
-    )
+    lower.includes("what date")
     ||
     lower === "date"
   ) {
@@ -1389,56 +1132,43 @@ function processCommand(input) {
     tellDate();
 
     return;
+
   }
 
 
-
   if (
-    lower.includes(
-      "system status"
-    )
+    lower.includes("system status")
     ||
-    lower.includes(
-      "status report"
-    )
+    lower.includes("status report")
   ) {
 
     speak(
       "All primary systems are online and functioning normally"
     );
 
-
     return;
+
   }
 
 
-
   if (
-    lower.includes(
-      "thank you"
-    )
+    lower.includes("thank you")
     ||
-    lower.includes(
-      "thanks"
-    )
+    lower.includes("thanks")
   ) {
 
     speak(
       "Always a pleasure"
     );
 
-
     return;
+
   }
 
 
-
   if (
-    lower.includes(
-      "weather"
-    )
+    lower.includes("weather")
   ) {
-
 
     let city =
       text
@@ -1446,59 +1176,43 @@ function processCommand(input) {
           /what('?s| is)? the weather( like)?/i,
           ""
         )
-
         .replace(
           /weather/i,
           ""
         )
-
         .replace(
           /\bin\b/i,
           ""
         )
-
         .replace(
           /\bfor\b/i,
           ""
         )
-
         .trim();
 
 
     if (!city) {
-
-      city =
-        "Missoula";
-
+      city = "Missoula";
     }
 
 
-    weatherByCity(
-      city
-    );
-
+    weatherByCity(city);
 
     return;
 
   }
 
 
-
-  askAI(
-    text
-  );
+  askAI(text);
 
 }
-
 
 
 /* ========================= */
 /* SETUP RECOGNITION */
 /* ========================= */
 
-
 function setupRecognition() {
-
 
   const Recognition =
     window.SpeechRecognition
@@ -1508,14 +1222,11 @@ function setupRecognition() {
 
   if (!Recognition) {
 
-
     statusText.textContent =
       "VOICE NOT SUPPORTED";
 
-
     substatus.textContent =
       "OPEN IN SAFARI";
-
 
     return;
 
@@ -1529,35 +1240,27 @@ function setupRecognition() {
   recognition.lang =
     "en-US";
 
-
   recognition.continuous =
     false;
 
-
   recognition.interimResults =
     false;
-
 
   recognition.maxAlternatives =
     1;
 
 
-
   recognition.onstart =
     () => {
 
-
       listening = true;
-
 
       hud.classList.add(
         "listening"
       );
 
-
       statusText.textContent =
         "LISTENING";
-
 
       substatus.textContent =
         "SPEAK NOW";
@@ -1565,10 +1268,8 @@ function setupRecognition() {
     };
 
 
-
   recognition.onresult =
     event => {
-
 
       const transcript =
         event.results[0][0]
@@ -1578,21 +1279,35 @@ function setupRecognition() {
       statusText.textContent =
         "COMMAND RECEIVED";
 
-
       substatus.textContent =
         transcript;
 
 
-      processCommand(
-        transcript
-      );
+      /*
+      IMPORTANT:
+      Stop recognition first,
+      then process after onend.
+      */
+
+      recognition._pendingTranscript =
+        transcript;
+
+
+      try {
+        recognition.stop();
+      }
+      catch (e) {}
 
     };
 
 
-
   recognition.onerror =
     event => {
+
+      console.log(
+        "Speech recognition error:",
+        event.error
+      );
 
 
       listening = false;
@@ -1600,12 +1315,6 @@ function setupRecognition() {
 
       hud.classList.remove(
         "listening"
-      );
-
-
-      console.log(
-        "Speech error:",
-        event.error
       );
 
 
@@ -1614,55 +1323,59 @@ function setupRecognition() {
         "not-allowed"
       ) {
 
-
         statusText.textContent =
           "MICROPHONE BLOCKED";
 
-
         substatus.textContent =
           "ALLOW MICROPHONE ACCESS";
-
 
         return;
 
       }
 
 
-      statusText.textContent =
-        "TAP TO SPEAK";
-
-
-      substatus.textContent =
-        "VOICE SYSTEM READY";
+      readyState();
 
     };
-
 
 
   recognition.onend =
     () => {
 
-
       listening = false;
-
 
       hud.classList.remove(
         "listening"
       );
 
 
-      if (
+      const transcript =
+        recognition._pendingTranscript;
+
+
+      recognition._pendingTranscript =
+        null;
+
+
+      if (transcript) {
+
+        /*
+        Give iPhone time to release
+        microphone audio before TTS.
+        */
+
+        setTimeout(
+          () => processCommand(transcript),
+          450
+        );
+
+      }
+      else if (
         !speaking &&
         !processing
       ) {
 
-
-        statusText.textContent =
-          "TAP TO SPEAK";
-
-
-        substatus.textContent =
-          "VOICE SYSTEM READY";
+        readyState();
 
       }
 
@@ -1671,41 +1384,46 @@ function setupRecognition() {
 }
 
 
-
 /* ========================= */
 /* START LISTENING */
 /* ========================= */
 
-
 function listen() {
-
 
   if (
     listening ||
     speaking ||
     processing
   ) {
-
     return;
-
   }
 
 
-  if (!recognition) {
+  /*
+  Cancel old speech first
+  */
 
+  try {
+    speechSynthesis.cancel();
+  }
+  catch (e) {}
+
+
+  if (!recognition) {
     setupRecognition();
-
   }
 
 
   if (!recognition) {
-
     return;
-
   }
 
 
-  speechSynthesis.cancel();
+  statusText.textContent =
+    "STARTING MICROPHONE";
+
+  substatus.textContent =
+    "PLEASE WAIT";
 
 
   try {
@@ -1717,19 +1435,20 @@ function listen() {
   catch (error) {
 
     console.log(
+      "Recognition start error:",
       error
     );
+
+    readyState();
 
   }
 
 }
 
 
-
 /* ========================= */
 /* TAP ANYWHERE */
 /* ========================= */
-
 
 app.addEventListener(
   "click",
@@ -1737,9 +1456,50 @@ app.addEventListener(
 );
 
 
+/* ========================= */
+/* RESET WHEN RETURNING */
+/* ========================= */
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    if (
+      document.visibilityState ===
+      "visible"
+    ) {
+
+      readyState();
+
+      try {
+
+        if (
+          speechSynthesis.paused
+        ) {
+          speechSynthesis.resume();
+        }
+
+      }
+      catch (e) {}
+
+    }
+
+  }
+);
+
+
+window.addEventListener(
+  "pageshow",
+  () => {
+
+    readyState();
+
+    findVoice();
+
+  }
+);
+
 </script>
 
-
 </body>
-
 </html>
