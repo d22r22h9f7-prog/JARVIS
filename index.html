@@ -16,11 +16,6 @@
 
   <title>JARVIS</title>
 
-
-  <!-- ========================= -->
-  <!-- IPHONE APP ICON -->
-  <!-- ========================= -->
-
   <link
     rel="apple-touch-icon"
     href="/apple-touch-icon.png"
@@ -54,7 +49,6 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-
     html,
     body {
       margin: 0;
@@ -79,11 +73,9 @@
       color: #aef7ff;
     }
 
-
     body {
       min-height: 100dvh;
     }
-
 
     .app {
 
@@ -95,17 +87,11 @@
       justify-content: center;
 
       position: relative;
-
       overflow: hidden;
 
       touch-action: manipulation;
+      cursor: pointer;
     }
-
-
-
-    /* ========================= */
-    /* BACKGROUND GLOW */
-    /* ========================= */
 
     .background-glow {
 
@@ -130,7 +116,6 @@
         backgroundPulse 4s ease-in-out infinite;
     }
 
-
     @keyframes backgroundPulse {
 
       0%,
@@ -144,12 +129,6 @@
         opacity: 1;
       }
     }
-
-
-
-    /* ========================= */
-    /* MAIN HUD */
-    /* ========================= */
 
     .hud {
 
@@ -169,12 +148,6 @@
         );
     }
 
-
-
-    /* ========================= */
-    /* OUTER TICK RING */
-    /* ========================= */
-
     .ticks {
 
       position: absolute;
@@ -183,14 +156,10 @@
       border-radius: 50%;
 
       background:
-
         repeating-conic-gradient(
-
           from 0deg,
-
           rgba(88, 235, 255, .8)
           0deg 1deg,
-
           transparent
           1deg 4deg
         );
@@ -221,12 +190,6 @@
         spin 38s linear infinite;
     }
 
-
-
-    /* ========================= */
-    /* HUD RINGS */
-    /* ========================= */
-
     .ring {
 
       position: absolute;
@@ -239,7 +202,6 @@
         inset 0 0 18px rgba(0, 217, 255, .08),
         0 0 18px rgba(0, 217, 255, .08);
     }
-
 
     .ring1 {
 
@@ -258,7 +220,6 @@
         spin 18s linear infinite;
     }
 
-
     .ring2 {
 
       width: 77%;
@@ -275,7 +236,6 @@
       animation:
         reverseSpin 14s linear infinite;
     }
-
 
     .ring3 {
 
@@ -294,7 +254,6 @@
         spin 9s linear infinite;
     }
 
-
     .ring4 {
 
       width: 48%;
@@ -312,12 +271,6 @@
         reverseSpin 7s linear infinite;
     }
 
-
-
-    /* ========================= */
-    /* INNER TICKS */
-    /* ========================= */
-
     .innerTicks {
 
       position: absolute;
@@ -328,12 +281,9 @@
       border-radius: 50%;
 
       background:
-
         repeating-conic-gradient(
-
           rgba(78, 232, 255, .75)
           0deg .7deg,
-
           transparent
           .7deg 5deg
         );
@@ -363,12 +313,6 @@
       animation:
         reverseSpin 24s linear infinite;
     }
-
-
-
-    /* ========================= */
-    /* AMBER ACCENT */
-    /* ========================= */
 
     .amber {
 
@@ -400,26 +344,17 @@
         amberMove 7s ease-in-out infinite;
     }
 
-
     @keyframes amberMove {
 
       0%,
       100% {
-        transform:
-          rotate(15deg);
+        transform: rotate(15deg);
       }
 
       50% {
-        transform:
-          rotate(48deg);
+        transform: rotate(48deg);
       }
     }
-
-
-
-    /* ========================= */
-    /* CENTER CORE */
-    /* ========================= */
 
     .core {
 
@@ -438,7 +373,6 @@
       text-align: center;
 
       background:
-
         radial-gradient(
           circle,
           rgba(0, 191, 230, .25),
@@ -451,10 +385,8 @@
         rgba(123, 244, 255, .55);
 
       box-shadow:
-
         inset 0 0 32px
         rgba(0, 220, 255, .17),
-
         0 0 30px
         rgba(0, 220, 255, .2);
 
@@ -463,12 +395,6 @@
       transition:
         .3s ease;
     }
-
-
-
-    /* ========================= */
-    /* TEXT */
-    /* ========================= */
 
     .name {
 
@@ -488,7 +414,6 @@
 
       margin-left: 5px;
     }
-
 
     .status {
 
@@ -510,7 +435,6 @@
       text-transform: uppercase;
     }
 
-
     .substatus {
 
       position: absolute;
@@ -531,37 +455,24 @@
       text-transform: uppercase;
     }
 
-
-
-    /* ========================= */
-    /* STATES */
-    /* ========================= */
-
     .hud.listening .core {
 
       transform: scale(1.08);
 
       box-shadow:
-
         inset 0 0 50px
         rgba(0, 225, 255, .35),
-
         0 0 55px
         rgba(0, 225, 255, .5);
     }
 
-
     .hud.listening .ring2 {
-
       animation-duration: 3s;
     }
 
-
     .hud.listening .ring3 {
-
       animation-duration: 2.2s;
     }
-
 
     .hud.thinking .core {
 
@@ -569,18 +480,13 @@
         corePulse .75s ease-in-out infinite;
     }
 
-
     .hud.thinking .ring1 {
-
       animation-duration: 4s;
     }
 
-
     .hud.thinking .ring2 {
-
       animation-duration: 2.5s;
     }
-
 
     .hud.speaking .core {
 
@@ -588,17 +494,9 @@
         speakingPulse .48s ease-in-out infinite;
     }
 
-
     .hud.speaking .ring4 {
-
       animation-duration: 1.8s;
     }
-
-
-
-    /* ========================= */
-    /* ANIMATIONS */
-    /* ========================= */
 
     @keyframes spin {
 
@@ -611,7 +509,6 @@
       }
     }
 
-
     @keyframes reverseSpin {
 
       from {
@@ -622,7 +519,6 @@
         transform: rotate(0deg);
       }
     }
-
 
     @keyframes corePulse {
 
@@ -635,7 +531,6 @@
         transform: scale(1.06);
       }
     }
-
 
     @keyframes speakingPulse {
 
@@ -651,36 +546,18 @@
       }
     }
 
-
-
-    /* ========================= */
-    /* START OVERLAY */
-    /* ========================= */
-
-    .startOverlay {
+    .tapHint {
 
       position: absolute;
 
-      inset: 0;
-
-      z-index: 30;
-
-      display: flex;
-
-      justify-content: center;
-
-      align-items: flex-end;
-
-      padding-bottom:
+      bottom:
         calc(
-          55px + env(safe-area-inset-bottom)
+          45px + env(safe-area-inset-bottom)
         );
 
-      pointer-events: none;
-    }
+      width: 100%;
 
-
-    .startText {
+      text-align: center;
 
       font-size: 11px;
 
@@ -690,22 +567,7 @@
         rgba(138, 231, 246, .55);
 
       text-transform: uppercase;
-
-      text-align: center;
-
-      transition: opacity .5s;
     }
-
-
-    .initialized .startText {
-      opacity: 0;
-    }
-
-
-
-    /* ========================= */
-    /* SMALL SCREEN */
-    /* ========================= */
 
     @media
     (max-width: 420px) {
@@ -734,7 +596,6 @@
     id="app"
   >
 
-
     <div
       class="background-glow"
     ></div>
@@ -745,41 +606,33 @@
       id="hud"
     >
 
-
       <div
         class="ticks"
       ></div>
-
 
       <div
         class="amber"
       ></div>
 
-
       <div
         class="ring ring1"
       ></div>
-
 
       <div
         class="ring ring2"
       ></div>
 
-
       <div
         class="innerTicks"
       ></div>
-
 
       <div
         class="ring ring3"
       ></div>
 
-
       <div
         class="ring ring4"
       ></div>
-
 
       <div
         class="core"
@@ -793,16 +646,14 @@
 
       </div>
 
-
     </div>
-
 
 
     <div
       class="status"
       id="status"
     >
-      TAP TO INITIALIZE
+      TAP TO SPEAK
     </div>
 
 
@@ -810,34 +661,21 @@
       class="substatus"
       id="substatus"
     >
-      VOICE SYSTEM OFFLINE
+      VOICE SYSTEM READY
     </div>
-
 
 
     <div
-      class="startOverlay"
+      class="tapHint"
     >
-
-      <div
-        class="startText"
-      >
-        TAP ANYWHERE TO START
-      </div>
-
+      TAP ANYWHERE
     </div>
-
 
   </div>
 
 
 
 <script>
-
-
-/* ======================================= */
-/* JARVIS */
-/* ======================================= */
 
 
 const app =
@@ -864,30 +702,21 @@ const substatus =
   );
 
 
-
-let initialized = false;
-
 let recognition = null;
 
-let recognitionRunning = false;
+let listening = false;
 
 let speaking = false;
 
 let processing = false;
 
-let wakeMode = true;
-
-let awake = false;
-
 let selectedVoice = null;
 
-let restartTimer = null;
 
 
-
-/* ======================================= */
-/* FIND BEST VOICE */
-/* ======================================= */
+/* ========================= */
+/* FIND VOICE */
+/* ========================= */
 
 
 function findVoice() {
@@ -953,7 +782,6 @@ function findVoice() {
 }
 
 
-
 speechSynthesis.onvoiceschanged =
   findVoice;
 
@@ -962,9 +790,9 @@ findVoice();
 
 
 
-/* ======================================= */
+/* ========================= */
 /* ADD SIR */
-/* ======================================= */
+/* ========================= */
 
 
 function addSir(text) {
@@ -1010,127 +838,12 @@ function addSir(text) {
 
 
 
-/* ======================================= */
-/* STOP RECOGNITION */
-/* ======================================= */
-
-
-function stopRecognition() {
-
-  clearTimeout(
-    restartTimer
-  );
-
-
-  if (
-    recognition &&
-    recognitionRunning
-  ) {
-
-    try {
-
-      recognition.stop();
-
-    }
-
-    catch (e) {}
-
-  }
-
-
-  recognitionRunning =
-    false;
-
-}
-
-
-
-/* ======================================= */
-/* START WAKE LISTENING */
-/* ======================================= */
-
-
-function startRecognition() {
-
-  if (
-    !initialized ||
-    speaking ||
-    processing ||
-    recognitionRunning
-  ) {
-
-    return;
-
-  }
-
-
-  if (!recognition) {
-    setupRecognition();
-  }
-
-
-  if (!recognition) {
-    return;
-  }
-
-
-  try {
-
-    recognition.start();
-
-  }
-
-  catch (e) {}
-
-}
-
-
-
-/* ======================================= */
-/* RESTART LISTENING */
-/* ======================================= */
-
-
-function restartListening(
-  delay = 500
-) {
-
-  clearTimeout(
-    restartTimer
-  );
-
-
-  if (!initialized) {
-    return;
-  }
-
-
-  restartTimer =
-    setTimeout(
-      () => {
-
-        startRecognition();
-
-      },
-      delay
-    );
-
-}
-
-
-
-/* ======================================= */
+/* ========================= */
 /* SPEAK */
-/* ======================================= */
+/* ========================= */
 
 
-function speak(
-  text,
-  keepAwake = false
-) {
-
-  stopRecognition();
-
+function speak(text) {
 
   speechSynthesis.cancel();
 
@@ -1157,15 +870,9 @@ function speak(
     "VOICE OUTPUT ACTIVE";
 
 
-  const finalText =
-    addSir(
-      text
-    );
-
-
   const utterance =
     new SpeechSynthesisUtterance(
-      finalText
+      addSir(text)
     );
 
 
@@ -1195,8 +902,7 @@ function speak(
   utterance.onend =
     () => {
 
-      speaking =
-        false;
+      speaking = false;
 
 
       hud.classList.remove(
@@ -1204,33 +910,12 @@ function speak(
       );
 
 
-      if (!keepAwake) {
-
-        awake =
-          false;
-
-      }
-
-
       statusText.textContent =
-        wakeMode
-          ?
-          'WAITING FOR "HEY JARVIS"'
-          :
-          "LISTENING";
+        "TAP TO SPEAK";
 
 
       substatus.textContent =
-        wakeMode
-          ?
-          "WAKE WORD ACTIVE"
-          :
-          "VOICE SYSTEM ONLINE";
-
-
-      restartListening(
-        650
-      );
+        "VOICE SYSTEM READY";
 
     };
 
@@ -1238,8 +923,7 @@ function speak(
   utterance.onerror =
     () => {
 
-      speaking =
-        false;
+      speaking = false;
 
 
       hud.classList.remove(
@@ -1247,9 +931,12 @@ function speak(
       );
 
 
-      restartListening(
-        600
-      );
+      statusText.textContent =
+        "TAP TO SPEAK";
+
+
+      substatus.textContent =
+        "VOICE SYSTEM READY";
 
     };
 
@@ -1262,18 +949,14 @@ function speak(
 
 
 
-/* ======================================= */
+/* ========================= */
 /* THINKING */
-/* ======================================= */
+/* ========================= */
 
 
 function thinkingOn() {
 
-  processing =
-    true;
-
-
-  stopRecognition();
+  processing = true;
 
 
   hud.classList.remove(
@@ -1297,11 +980,9 @@ function thinkingOn() {
 }
 
 
-
 function thinkingOff() {
 
-  processing =
-    false;
+  processing = false;
 
 
   hud.classList.remove(
@@ -1312,14 +993,12 @@ function thinkingOff() {
 
 
 
-/* ======================================= */
+/* ========================= */
 /* ASK AI */
-/* ======================================= */
+/* ========================= */
 
 
-async function askAI(
-  message
-) {
+async function askAI(message) {
 
   thinkingOn();
 
@@ -1416,9 +1095,9 @@ async function askAI(
 
 
 
-/* ======================================= */
+/* ========================= */
 /* TIME */
-/* ======================================= */
+/* ========================= */
 
 
 function tellTime() {
@@ -1448,9 +1127,9 @@ function tellTime() {
 
 
 
-/* ======================================= */
+/* ========================= */
 /* DATE */
-/* ======================================= */
+/* ========================= */
 
 
 function tellDate() {
@@ -1485,9 +1164,9 @@ function tellDate() {
 
 
 
-/* ======================================= */
+/* ========================= */
 /* WEATHER */
-/* ======================================= */
+/* ========================= */
 
 
 async function weatherByCity(
@@ -1624,27 +1303,25 @@ async function weatherByCity(
 
 
 
-/* ======================================= */
+/* ========================= */
 /* PROCESS COMMAND */
-/* ======================================= */
+/* ========================= */
 
 
-function processCommand(
-  input
-) {
+function processCommand(input) {
 
-  let text =
-    input
-      .trim();
+  const text =
+    input.trim();
 
 
   if (!text) {
 
-    awake =
-      false;
+    statusText.textContent =
+      "TAP TO SPEAK";
 
 
-    restartListening();
+    substatus.textContent =
+      "VOICE SYSTEM READY";
 
 
     return;
@@ -1655,13 +1332,17 @@ function processCommand(
     text.toLowerCase();
 
 
-  /* GREETINGS */
 
   if (
-    lower === "hello" ||
-    lower === "hi" ||
-    lower === "hey" ||
-    lower === "hello jarvis"
+    lower === "hello"
+    ||
+    lower === "hi"
+    ||
+    lower === "hey"
+    ||
+    lower.includes(
+      "hello jarvis"
+    )
   ) {
 
     speak(
@@ -1673,8 +1354,6 @@ function processCommand(
   }
 
 
-
-  /* TIME */
 
   if (
     lower.includes(
@@ -1695,8 +1374,6 @@ function processCommand(
 
 
 
-  /* DATE */
-
   if (
     lower.includes(
       "what day"
@@ -1715,8 +1392,6 @@ function processCommand(
   }
 
 
-
-  /* STATUS */
 
   if (
     lower.includes(
@@ -1738,8 +1413,6 @@ function processCommand(
 
 
 
-  /* THANKS */
-
   if (
     lower.includes(
       "thank you"
@@ -1759,8 +1432,6 @@ function processCommand(
   }
 
 
-
-  /* WEATHER */
 
   if (
     lower.includes(
@@ -1813,8 +1484,6 @@ function processCommand(
 
 
 
-  /* EVERYTHING ELSE GOES TO AI */
-
   askAI(
     text
   );
@@ -1823,170 +1492,9 @@ function processCommand(
 
 
 
-/* ======================================= */
-/* HANDLE HEARD SPEECH */
-/* ======================================= */
-
-
-function handleSpeech(
-  transcript
-) {
-
-  if (
-    speaking ||
-    processing
-  ) {
-
-    return;
-  }
-
-
-  let text =
-    transcript
-      .trim();
-
-
-  if (!text) {
-    return;
-  }
-
-
-  console.log(
-    "Heard:",
-    text
-  );
-
-
-  const lower =
-    text.toLowerCase();
-
-
-  /*
-  IF JARVIS IS ALREADY AWAKE
-  PROCESS WHATEVER HE HEARS
-  */
-
-  if (awake) {
-
-    awake =
-      false;
-
-
-    hud.classList.add(
-      "listening"
-    );
-
-
-    statusText.textContent =
-      "COMMAND RECEIVED";
-
-
-    processCommand(
-      text
-    );
-
-
-    return;
-  }
-
-
-
-  /*
-  WAKE WORD:
-  "HEY JARVIS"
-  "JARVIS"
-  */
-
-
-  const wakeMatch =
-    lower.match(
-      /\b(?:hey\s+)?jarvis\b/i
-    );
-
-
-  if (!wakeMatch) {
-
-    statusText.textContent =
-      'WAITING FOR "HEY JARVIS"';
-
-
-    substatus.textContent =
-      "WAKE WORD ACTIVE";
-
-
-    return;
-  }
-
-
-
-  let command =
-    text
-      .replace(
-        /\b(?:hey\s+)?jarvis\b/i,
-        ""
-      )
-
-      .replace(
-        /^[,\s]+/,
-        ""
-      )
-
-      .trim();
-
-
-
-  /*
-  USER SAID:
-  "HEY JARVIS, WHAT TIME IS IT?"
-  */
-
-  if (command) {
-
-    awake =
-      false;
-
-
-    hud.classList.add(
-      "listening"
-    );
-
-
-    statusText.textContent =
-      "COMMAND RECEIVED";
-
-
-    processCommand(
-      command
-    );
-
-
-    return;
-  }
-
-
-
-  /*
-  USER ONLY SAID:
-  "HEY JARVIS"
-  */
-
-
-  awake =
-    true;
-
-
-  speak(
-    "Yes",
-    true
-  );
-
-}
-
-
-
-/* ======================================= */
-/* SPEECH RECOGNITION */
-/* ======================================= */
+/* ========================= */
+/* SETUP RECOGNITION */
+/* ========================= */
 
 
 function setupRecognition() {
@@ -2023,7 +1531,7 @@ function setupRecognition() {
 
 
   recognition.continuous =
-    true;
+    false;
 
 
   recognition.interimResults =
@@ -2039,37 +1547,20 @@ function setupRecognition() {
     () => {
 
 
-      recognitionRunning =
-        true;
+      listening = true;
 
 
-      if (
-        !speaking &&
-        !processing
-      ) {
+      hud.classList.add(
+        "listening"
+      );
 
 
-        hud.classList.add(
-          "listening"
-        );
+      statusText.textContent =
+        "LISTENING";
 
 
-        statusText.textContent =
-          awake
-            ?
-            "LISTENING"
-            :
-            'WAITING FOR "HEY JARVIS"';
-
-
-        substatus.textContent =
-          awake
-            ?
-            "AWAITING COMMAND"
-            :
-            "WAKE WORD ACTIVE";
-
-      }
+      substatus.textContent =
+        "SPEAK NOW";
 
     };
 
@@ -2079,25 +1570,20 @@ function setupRecognition() {
     event => {
 
 
-      const last =
-        event.results.length - 1;
-
-
-      const result =
-        event.results[last];
-
-
-      if (!result.isFinal) {
-        return;
-      }
-
-
       const transcript =
-        result[0]
+        event.results[0][0]
           .transcript;
 
 
-      handleSpeech(
+      statusText.textContent =
+        "COMMAND RECEIVED";
+
+
+      substatus.textContent =
+        transcript;
+
+
+      processCommand(
         transcript
       );
 
@@ -2109,14 +1595,18 @@ function setupRecognition() {
     event => {
 
 
+      listening = false;
+
+
+      hud.classList.remove(
+        "listening"
+      );
+
+
       console.log(
         "Speech error:",
         event.error
       );
-
-
-      recognitionRunning =
-        false;
 
 
       if (
@@ -2138,37 +1628,12 @@ function setupRecognition() {
       }
 
 
-      if (
-        event.error ===
-        "audio-capture"
-      ) {
+      statusText.textContent =
+        "TAP TO SPEAK";
 
 
-        statusText.textContent =
-          "MICROPHONE ERROR";
-
-
-        substatus.textContent =
-          "CHECK MICROPHONE";
-
-
-        return;
-
-      }
-
-
-      if (
-        initialized &&
-        !speaking &&
-        !processing
-      ) {
-
-
-        restartListening(
-          900
-        );
-
-      }
+      substatus.textContent =
+        "VOICE SYSTEM READY";
 
     };
 
@@ -2178,8 +1643,7 @@ function setupRecognition() {
     () => {
 
 
-      recognitionRunning =
-        false;
+      listening = false;
 
 
       hud.classList.remove(
@@ -2188,15 +1652,17 @@ function setupRecognition() {
 
 
       if (
-        initialized &&
         !speaking &&
         !processing
       ) {
 
 
-        restartListening(
-          500
-        );
+        statusText.textContent =
+          "TAP TO SPEAK";
+
+
+        substatus.textContent =
+          "VOICE SYSTEM READY";
 
       }
 
@@ -2206,150 +1672,69 @@ function setupRecognition() {
 
 
 
-/* ======================================= */
-/* INITIALIZE JARVIS */
-/* ======================================= */
+/* ========================= */
+/* START LISTENING */
+/* ========================= */
 
 
-function initializeJarvis() {
+function listen() {
 
 
-  if (initialized) {
-
-    /*
-    MANUAL TAP STILL WORKS
-    */
-
-    awake =
-      true;
-
-
-    speak(
-      "Yes",
-      true
-    );
-
+  if (
+    listening ||
+    speaking ||
+    processing
+  ) {
 
     return;
+
   }
 
 
-  initialized =
-    true;
+  if (!recognition) {
+
+    setupRecognition();
+
+  }
 
 
-  app.classList.add(
-    "initialized"
-  );
+  if (!recognition) {
+
+    return;
+
+  }
 
 
-  setupRecognition();
+  speechSynthesis.cancel();
 
 
-  /*
-  ASK FOR MIC ACCESS
-  */
+  try {
 
+    recognition.start();
 
-  startRecognition();
+  }
 
+  catch (error) {
 
-  speak(
-    "JARVIS online. Voice wake system activated"
-  );
+    console.log(
+      error
+    );
 
-
-  statusText.textContent =
-    'WAITING FOR "HEY JARVIS"';
-
-
-  substatus.textContent =
-    "WAKE WORD ACTIVE";
+  }
 
 }
 
 
 
-/* ======================================= */
+/* ========================= */
 /* TAP ANYWHERE */
-/* ======================================= */
+/* ========================= */
 
 
 app.addEventListener(
   "click",
-  initializeJarvis
+  listen
 );
-
-
-
-/* ======================================= */
-/* RETURN FROM BACKGROUND */
-/* ======================================= */
-
-
-document.addEventListener(
-  "visibilitychange",
-  () => {
-
-
-    if (
-      document.visibilityState ===
-      "visible"
-      &&
-      initialized
-      &&
-      !speaking
-      &&
-      !processing
-    ) {
-
-
-      restartListening(
-        700
-      );
-
-    }
-
-
-    else if (
-      document.visibilityState ===
-      "hidden"
-    ) {
-
-
-      stopRecognition();
-
-    }
-
-  }
-);
-
-
-
-/* ======================================= */
-/* KEEP SCREEN STATE READY */
-/* ======================================= */
-
-
-window.addEventListener(
-  "pageshow",
-  () => {
-
-
-    if (
-      initialized
-    ) {
-
-
-      restartListening(
-        700
-      );
-
-    }
-
-  }
-);
-
 
 
 </script>
